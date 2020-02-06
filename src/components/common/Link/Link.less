@@ -1,0 +1,30 @@
+@import "./../variables";
+
+.link {
+  font-family: @font-family-global;
+  font-size: @font-size-global;
+  line-height: @line-height-global;
+  color: @color-grey-blue;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    color: @color-red;
+  }
+
+  &_blue {
+    color: @color-primary;
+  }
+
+  &_dark-grey {
+    color: @color-dark-grey;
+  }
+
+  &_disabled {
+    cursor: none;
+    pointer-events: none;
+    color: @color-light-grey;
+  }
+}
