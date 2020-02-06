@@ -6,8 +6,8 @@ import "./Navigation.less";
 Принимает массив объектов с конфигурацией для каждой ссылки
 - linksConfig | array of Object 
 - linksConfig[i] | Object     
-    - url       | string |           (адрес)
-    - title     | string |           (название ссылки)
+    - url           | string |           (адрес)
+    - title         | string |           (название ссылки)
     - modifierArr   | array of string|   (массив модификаторов)
 */
 export default function Navigation(props) {
@@ -21,7 +21,7 @@ export default function Navigation(props) {
         <Link
           url={linkConfig.url}
           title={linkConfig.title}
-          modifierArr={linkConfig.typeArr}
+          modifierArr={linkConfig.modifierArr}
         />
       </li>
     );

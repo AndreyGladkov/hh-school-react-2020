@@ -12,10 +12,10 @@ export default function Link(props) {
   const title = props.title || "";
   const modifierArr = props.modifierArr || "";
 
-  let className = "link ";
+  let className = "link";
   if (modifierArr) {
     modifierArr.forEach((modifier, i) => (modifierArr[i] = `link_${modifier}`));
-    className += modifierArr.join(" ");
+    className += " " + modifierArr.join(" ");
   }
 
   return (

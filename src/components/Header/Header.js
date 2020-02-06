@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { LayoutWrapper } from "./../common/Layout/Layout";
 import Logo from "./../common/Logo/Logo";
+import Button from "./../common/Button/Button";
 import Navigation from "./../common/Navigation/Navigation";
 import "./Header.less";
 
@@ -30,6 +31,19 @@ export default class Header extends Component {
               <Logo url={"/"} src={"../../images/logo.svg"} alt={"hh.ru"} />
             </div>
             <Navigation linksConfig={this.state.linksConfig} />
+            <div className="header__fill"></div>
+            <div className="header__button">
+              <Button type="icon" modifierArr={["search"]} />
+            </div>
+            <div className="header__button">
+              <Button type="icon" modifierArr={["login"]} />
+            </div>
+            <div className="header__button-login">
+              <Button title={"Войти"} modifierArr={["login"]} />
+            </div>
+            <div className="header__button-menu">
+              <Button type="icon" modifierArr={["menu"]} />
+            </div>
           </div>
         </LayoutWrapper>
       </section>

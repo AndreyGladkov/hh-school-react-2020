@@ -1,13 +1,14 @@
-@import "./../common/variables";
+@import "./../variables";
+@imagesPath: "./../../../images";
 
-.default-button() {
+.button {
   box-sizing: border-box;
   height: @control-height;
   display: inline-block;
   padding: 0 15px;
   border: 1px solid transparent;
   border-radius: 1px;
-  background: @color-primary;
+  background: none;
   font: 14px/ (@control-height - 2px) Arial, sans-serif;
   text-align: center;
   color: @color-light;
@@ -16,15 +17,23 @@
   transition-duration: 0.2s;
   transition-timing-function: ease;
   transition-property: background-color, border-color, color;
-}
 
-.button() {
-  .default-button();
+  &_login {
+    border-color: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 0 18px;
+  }
+
+  &_disabled {
+    cursor: none;
+    pointer-events: none;
+    color: @color-light-grey;
+  }
 
   &:hover,
   &:focus,
   &:active {
-    background-color: @color-primary-hover;
+    border-color: rgba(255, 255, 255, 1);
     outline: none;
   }
 
@@ -33,30 +42,43 @@
   }
 }
 
-.button-submit {
+.button_submit {
   .button();
   width: 100%;
-
-  &_disabled {
-    opacity: 0.5;
-  }
 
   @media @screen-gt-s {
     width: 138px;
   }
 }
 
-.button-close-icon {
-  width: 40px;
-  height: 40px;
+.button-icon {
+  width: 30px;
+  height: 30px;
   background: no-repeat 50% 50%;
   border: 0;
-  cursor: pointer;
+  border-radius: 0;
   text-indent: -9999px;
-  background-image: url("close.svg");
+  outline: none;
+  cursor: pointer;
 
-  &:hover,
-  &:focus {
-    outline: none;
+  &_close {
+    width: 40px;
+    height: 40px;
+    background-image: url("@{imagesPath}/close.svg");
+  }
+
+  &_search {
+    background-image: url("@{imagesPath}/search-icon.svg");
+  }
+
+  &_login {
+    background-image: url("@{imagesPath}/login-icon.svg");
+    @media @screen-gt-s {
+      display: none;
+    }
+  }
+
+  &_menu {
+    background-image: url("@{imagesPath}/menu-icon.svg");
   }
 }

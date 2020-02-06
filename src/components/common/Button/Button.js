@@ -3,10 +3,10 @@ import "./Button.less";
 
 /* Компонент Button.
 Принимает: 
-- title         | string |           (название кнопки)
-- type          | string |           (тип кнопки)
-- modifierArr   | array of string|   (массив модификаторов)
-- onClickHandler|function|           (обработчик нажатия на кнопку)
+- title          | string |           (название кнопки)
+- type           | string |           (тип кнопки)
+- modifierArr    | array of string|   (массив модификаторов)
+- onClickHandler |function|           (обработчик нажатия на кнопку)
 */
 export default function Button(props) {
   const title = props.title || "";
@@ -14,12 +14,12 @@ export default function Button(props) {
   const modifierArr = props.modifierArr || "";
   const onClickHandler = props.onClickHandler || null;
 
-  let className = buttonType ? "button " : `button-${buttonType} `;
+  let className = buttonType ? `button-${buttonType}` : "button";
   if (modifierArr) {
     modifierArr.forEach(
-      (modifier, i) => (modifierArr[i] = `button_${modifier}`)
+      (modifier, i) => (modifierArr[i] = `${className}_${modifier}`)
     );
-    className += modifierArr.join(" ");
+    className += " " + modifierArr.join(" ");
   }
 
   return (
