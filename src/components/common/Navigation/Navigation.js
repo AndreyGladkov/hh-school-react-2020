@@ -17,7 +17,7 @@ export default function Navigation(props) {
 
   const navigationList = props.linksConfig.map((linkConfig, index) => {
     return (
-      <li className="navigation__item" key={index + Math.random()}>
+      <li className="navigation__item" key={index}>
         <Link
           url={linkConfig.url}
           title={linkConfig.title}

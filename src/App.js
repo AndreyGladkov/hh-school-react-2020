@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
+import Slider from "./components/Slider/Slider";
 
 export default class App extends React.Component {
   state = {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <Navbar />
         <Header />
+        <Slider />
       </React.Fragment>
     );
   }

@@ -14,7 +14,9 @@ export default function Link(props) {
 
   let className = "link";
   if (modifierArr) {
-    modifierArr.forEach((modifier, i) => (modifierArr[i] = `link_${modifier}`));
+    modifierArr.forEach(
+      (modifier, i) => (modifierArr[i] = `${className}_${modifier}`)
+    );
     className += " " + modifierArr.join(" ");
   }
 
