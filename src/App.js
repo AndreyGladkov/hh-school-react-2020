@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import Slider from "./components/Slider/Slider";
 import Content from "./components/Content/Content";
+import Features from "./components/Features/Features";
 const axios = require("axios");
 
 export default class App extends React.Component {
@@ -43,6 +44,7 @@ export default class App extends React.Component {
           <Header />
           <Slider />
           <Content productDataArr={this.state.dataFromServer} />
+          <Features />
         </React.Fragment>
       );
     } else if (this.state.appStatus === "not ready") {

@@ -16,7 +16,6 @@ export default class Content extends Component {
   }
 
   render() {
-    console.log(this.context);
     const products = Object.values(this.state.productDataArr).map(
       (productData, index) => {
         return <ProductCard productData={productData} key={index} />;
