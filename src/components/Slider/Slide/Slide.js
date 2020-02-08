@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { LayoutRow, LayoutColumn } from "./../../common/Layout/Layout";
 import Button from "./../../common/Button/Button";
 import "./Slide.less";
-import "./../../common/headings.less";
 
 /* Компонент Slide.
 Принимает: 

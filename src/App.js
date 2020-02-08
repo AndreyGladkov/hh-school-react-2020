@@ -4,6 +4,7 @@ import Fail from "./components/common/Fail/Fail";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import Slider from "./components/Slider/Slider";
+import Content from "./components/Content/Content";
 const axios = require("axios");
 
 export default class App extends React.Component {
@@ -16,16 +17,16 @@ export default class App extends React.Component {
     //Получить данные с сервера
     if (this.state.appStatus === "not ready") {
       axios
-        .get("http://localhost:9200/api/feelinglucy")
+        .get("http://localhost:9200/api/feelinglucky")
         .then(response => {
           /* Имитация долгой загрузки с сервера (показать лоадер) */
           return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(response), 2000);
+            setTimeout(() => resolve(response), 0);
           });
         })
-        .then(data => {
-          /* Данные получены, приложение готов */
-          this.setState({ dataFromServer: data, appStatus: "ready" });
+        .then(response => {
+          /* Данные получены, приложение готово */
+          this.setState({ dataFromServer: response.data, appStatus: "ready" });
         })
         .catch(error => {
           console.log(error);
@@ -41,6 +42,7 @@ export default class App extends React.Component {
           <Navbar />
           <Header />
           <Slider />
+          <Content productDataArr={this.state.dataFromServer} />
         </React.Fragment>
       );
     } else if (this.state.appStatus === "not ready") {
