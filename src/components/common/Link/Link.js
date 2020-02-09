@@ -5,14 +5,17 @@ import "./Link.less";
 Принимает: 
 - url         | string |           (адрес ссылки)
 - title       | string |           (название ссылки)
+- linkType    | string |           (тип ссылки:  "" | 'icon')
 - modifierArr | array of string|   (массив модификаторов)
 */
 export default function Link(props) {
   const url = props.url || "/";
   const title = props.title || "";
   const modifierArr = props.modifierArr || "";
+  const linkType = props.linkType || "";
 
-  let className = "link";
+  let className = linkType ? `link-${linkType}` : "link";
+
   if (modifierArr) {
     modifierArr.forEach(
       (modifier, i) => (modifierArr[i] = `${className}_${modifier}`)

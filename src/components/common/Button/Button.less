@@ -86,3 +86,16 @@
     background-image: url("@{imagesPath}/menu-icon.svg");
   }
 }
+
+/* extend (.class) не позволяет расширить динамечски созданный класс */
+.button-icon_app-store {
+  width: 140px;
+  height: 40px;
+  padding: 0;
+  background-image: url("@{imagesPath}/app-store-icon.svg");
+}
+
+.button-icon_google-play {
+  &:extend(.button-icon_app-store);
+  background-image: url("@{imagesPath}/google-play-icon.svg");
+}
