@@ -22,18 +22,14 @@ export default class Radio extends Component {
       disabled: props.disabled || false,
       checked: props.checked || false,
       modifierArr: props.modifierArr || "",
-      useContext: props.useContext || null
+      onChangeHandler:
+        props.onChangeHandler || this.onChangeHandlerSelf.bind(this)
     };
   }
 
-  onChangeHandler(e) {
+  onChangeHandlerSelf(e) {
     if (this.state.disabled) return;
-
     this.setState({ checked: !this.state.checked });
-
-    if (this.state.useContext) {
-      this.state.useContext.setState({ sizeChecked: e.target.value });
-    }
   }
 
   render() {
@@ -57,7 +53,7 @@ export default class Radio extends Component {
         disabled={this.state.disabled}
         type={"radio"}
         defaultChecked={this.state.checked}
-        onChange={this.onChangeHandler.bind(this)}
+        onChange={this.state.onChangeHandler}
       ></input>
     );
   }

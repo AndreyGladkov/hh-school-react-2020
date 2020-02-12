@@ -55,7 +55,9 @@ export default class ProductCardPopup extends Component {
             id={inputId}
             disabled={!size[1]}
             modifierArr={["sqared", "size"]}
-            useContext={this}
+            onChangeHandler={e =>
+              this.setState({ sizeChecked: e.target.value })
+            }
           />
           <Label htmlFor={inputId} title={size[0]} disabled={!size[1]} />
         </React.Fragment>
