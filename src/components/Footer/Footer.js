@@ -22,6 +22,7 @@ import "./Footer.less";
 export default class Footer extends Component {
   state = {
     statisticsData: {
+      //данные для блока статистики
       numOfVacancies: "684 978",
       numOfResumes: "34 789 747",
       numOfCompanies: "858 923",

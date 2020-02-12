@@ -5,11 +5,12 @@
   margin-bottom: 15px;
   text-align: center;
   cursor: pointer;
+  min-width: 212px;
 
   &__image-container {
     font-size: 0;
     position: relative;
-    min-height: 212px;
+    min-width: 212px;
     margin: 0 auto 10px auto;
 
     @media @screen-gt-m {
@@ -56,6 +57,7 @@
     font: normal 14px/20px @font-family-heading;
     margin-top: 10px;
     margin-bottom: 15px;
+    text-align: center;
   }
 
   &__sizes {
@@ -67,17 +69,3 @@
     width: 100%;
   }
 }
-/* 
-.radio-button-size-item {
-  .radio-button-sqared();
-
-  display: none;
-  &__label {
-    text-transform: uppercase;
-  }
-
-  &:checked + .radio-button-size-item__label {
-    background-color: @color-light-grey;
-  }
-}
- */

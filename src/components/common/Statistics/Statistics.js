@@ -1,7 +1,10 @@
 import React from "react";
 import "./Statistics.less";
 
-/* Компонент Statistics*/
+/* Компонент Statistics
+Принимает:
+- statisticsData  | object |       (объект с данными для статистики)
+*/
 export default function Statistics(props) {
   if (!props.statisticsData) return;
 
@@ -10,6 +13,7 @@ export default function Statistics(props) {
   const numOfCompanies = props.statisticsData.numOfCompanies;
   const numOfInvitations = props.statisticsData.numOfInvitations;
 
+  /* Склонения [one, some, many] */
   const vacanciesExpressions = ["вакансия", "вакансии", "вакансий"];
   const resumesExpressions = ["резюме", "резюме", "резюме"];
   const companiesExpressions = ["компания", "компании", "компаний"];

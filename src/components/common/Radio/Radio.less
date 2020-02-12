@@ -1,0 +1,66 @@
+@import "./../variables";
+@import "./../Label/Label";
+
+.radio {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  background: @color-light;
+  font-family: @font-family-global;
+  font-size: @font-size-global;
+  line-height: (@control-height - 18px);
+  transition: 0.2s all linear;
+
+  &_circle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 12px;
+    width: 16px;
+    height: 16px;
+    top: 1px;
+    border: 1px solid #c5c9ca;
+    outline: none;
+
+    &:checked {
+      border: 5px solid @color-primary-checked;
+    }
+  }
+
+  &_sqared {
+    position: absolute;
+    clip: rect(0 0 0 0);
+
+    &:checked + .label {
+      background-color: @color-light-grey;
+    }
+
+    & + .label {
+      border: 1px solid @color-light-grey;
+      box-sizing: border-box;
+      height: @control-height;
+      width: 146px;
+      text-align: center;
+
+      @media @screen-gt-s {
+        width: 146px;
+      }
+
+      @media @screen-gt-m {
+        width: 123px;
+      }
+    }
+  }
+
+  &_size {
+    /* display: none; */
+
+    &:checked + .label {
+      background-color: @color-light-grey;
+    }
+
+    & + .label {
+      text-transform: uppercase;
+    }
+  }
+}

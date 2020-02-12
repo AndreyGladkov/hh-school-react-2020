@@ -12,7 +12,7 @@ const axios = require("axios");
 export default class App extends React.Component {
   state = {
     dataFromServer: [], //данные, полученные с сервера
-    appStatus: "not ready" // not ready, ready, fail
+    appStatus: "not ready" // not ready, ready, fail,
   };
 
   componentDidMount() {

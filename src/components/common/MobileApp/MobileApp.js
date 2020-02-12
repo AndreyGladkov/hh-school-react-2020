@@ -5,14 +5,14 @@ import "./MobileApp.less";
 /* Компонент MobileApp*/
 export default class MobileApp extends Component {
   state = {
-    linksConfig: [
+    appsConfig: [
       { url: "/", resource: "app-store" },
       { url: "/", resource: "google-play" }
     ]
   };
 
   render() {
-    const appLinks = this.state.linksConfig.map((appConfig, index) => {
+    const appLinks = this.state.appsConfig.map((appConfig, index) => {
       return (
         <div className="mobileApp__button" key={index}>
           <Button
