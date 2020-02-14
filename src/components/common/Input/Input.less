@@ -1,45 +1,50 @@
 @import "./../variables";
 
-.input {
-  box-sizing: border-box;
+.input-block {
+  display: flex;
+  flex-direction: column;
 
-  width: 100%;
-  height: @control-height;
-  display: inline-block;
-  padding: 9px 10px;
-  border: 1px solid @color-light-grey;
-  background: @color-light;
-  font-family: @font-family-global;
-  font-size: @font-size-global;
-  line-height: (@control-height - 18px);
-  text-align: left;
-  color: @color-dark-1;
+  .input {
+    box-sizing: border-box;
 
-  &:focus,
-  &:active {
-    border-color: @color-primary;
-  }
-
-  &:required,
-  &_invalid {
-    border-color: @color-red;
-  }
-
-  &_tel-country-code {
-    width: 38px;
-  }
-
-  &_tel-operator-code {
-    width: 62px;
-  }
-
-  &_tel-number-code {
     width: 100%;
-  }
+    height: @control-height;
+    display: inline-block;
+    padding: 9px 10px;
+    border: 1px solid @color-light-grey;
+    background: @color-light;
+    font-family: @font-family-global;
+    font-size: @font-size-global;
+    line-height: (@control-height - 18px);
+    text-align: left;
+    color: @color-dark-1;
 
-  &__error {
-    color: @color-red;
-    padding-left: 1px;
-    font: normal 12px/18px @font-family-heading;
+    &:focus,
+    &:active {
+      border-color: @color-primary;
+    }
+
+    &:required,
+    &_invalid {
+      border-color: @color-red;
+    }
+
+    &_tel-country-code {
+      width: 38px;
+    }
+
+    &_tel-operator-code {
+      width: 62px;
+    }
+
+    &_tel-number-code {
+      width: 100%;
+    }
+
+    &__error {
+      color: @color-red;
+      padding-left: 1px;
+      font: normal 12px/18px @font-family-heading;
+    }
   }
 }

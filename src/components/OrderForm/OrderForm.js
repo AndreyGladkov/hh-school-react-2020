@@ -17,7 +17,6 @@ export default class OrderForm extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
       controls: {
-        /* Конфигурация используемых контроллов */
         fullName: {
           name: "fullName",
           value: "",
@@ -130,6 +129,42 @@ export default class OrderForm extends Component {
 
           required: true
         },
+        paymentOnline: {
+          name: "paymentMethod",
+          value: "paymentOnline",
+          withLabel: true,
+          labelTitle: "Онлайн-оплата",
+          disabled: false,
+          checked: true,
+          modifierArr: ["circle"],
+          onChangeHandler: null,
+
+          required: true
+        },
+        paymentCash: {
+          name: "paymentMethod",
+          value: "paymentCash",
+          withLabel: true,
+          labelTitle: "Наличными",
+          disabled: false,
+          checked: false,
+          modifierArr: ["circle"],
+          onChangeHandler: null,
+
+          required: true
+        },
+        paymentCard: {
+          name: "paymentMethod",
+          value: "paymentCard",
+          withLabel: true,
+          labelTitle: "Картой при получении",
+          disabled: false,
+          checked: false,
+          modifierArr: ["circle"],
+          onChangeHandler: null,
+
+          required: true
+        },
         smsNotification: {
           name: "smsNotification",
           value: "",
@@ -230,6 +265,25 @@ export default class OrderForm extends Component {
       );
     });
 
+    /* Способ оплаты */
+    const paymentMethods = ["paymentOnline", "paymentCash", "paymentCard"];
+    const paymentMethodsJSX = paymentMethods.map((controlName, index) => {
+      return (
+        <div className="form__payment-method" key={index}>
+          <Radio
+            name={this.state.controls[controlName].name}
+            value={this.state.controls[controlName].value}
+            withLabel={this.state.controls[controlName].withLabel}
+            labelTitle={this.state.controls[controlName].labelTitle}
+            checked={this.state.controls[controlName].checked}
+            disabled={this.state.controls[controlName].disabled}
+            modifierArr={this.state.controls[controlName].modifierArr}
+            onChangeHandler={null}
+          />
+        </div>
+      );
+    });
+
     return (
       <form className="form">
         <LayoutWrapper>
@@ -260,6 +314,12 @@ export default class OrderForm extends Component {
                 </h4>
                 <div className="form__delivery-method">
                   {deliveryMethodsJSX}
+                </div>
+              </div>
+              <div className="form__section">
+                <div className="form__payment-methods">
+                  <h4 className="heading heading_level-4">Оплата</h4>
+                  {paymentMethodsJSX}
                 </div>
               </div>
               <div className="form__section">
