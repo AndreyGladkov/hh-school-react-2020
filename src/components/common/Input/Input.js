@@ -74,7 +74,7 @@ export default class Input extends Component {
     }
 
     return (
-      <div className="input-block">
+      <React.Fragment>
         <input
           className={className}
           id={this.state.id}
@@ -96,7 +96,7 @@ export default class Input extends Component {
             disabled={this.props.disabled}
           />
         ) : null}
-      </div>
+      </React.Fragment>
     );
   }
 }

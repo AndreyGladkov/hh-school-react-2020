@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Input from "./../common/Input/Input";
 import Radio from "./../common/Radio/Radio";
 import Button from "./../common/Button/Button";
+import Checkbox from "./../common/Checkbox/Checkbox";
 import {
   LayoutRow,
   LayoutWrapper,
@@ -96,7 +97,7 @@ export default class OrderForm extends Component {
           placeholder: "Номер",
           readOnly: false,
           autocomplete: "off",
-          modifierArr: ["tel-number"],
+          modifierArr: ["tel-number-code"],
           disabled: false,
           onChangeHandler: this.onChangeHandler,
           valid: false,
@@ -126,6 +127,18 @@ export default class OrderForm extends Component {
           checked: true,
           modifierArr: ["sqared"],
           onChangeHandler: this.onChangeHandler,
+
+          required: true
+        },
+        smsNotification: {
+          name: "smsNotification",
+          value: "",
+          withLabel: true,
+          labelTitle: "Хочу получать SMS уведомления",
+          disabled: false,
+          checked: true,
+          modifierArr: [],
+          onChangeHandler: null,
 
           required: true
         }
@@ -232,7 +245,7 @@ export default class OrderForm extends Component {
             />
           </div>
           <LayoutRow>
-            <LayoutColumn sColumnQnt={"1"} mColumnQnt={"2"} lColumnQnt={"4"}>
+            <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
               <div className="form__section">
                 <div className="form__input-main-contacts">
                   <h1 className="heading heading_level-1">Оформление заказа</h1>
@@ -247,6 +260,23 @@ export default class OrderForm extends Component {
                 </h4>
                 <div className="form__delivery-method">
                   {deliveryMethodsJSX}
+                </div>
+              </div>
+              <div className="form__section">
+                <div className="form__notification">
+                  <h4 className="heading heading_level-4">Уведомления</h4>
+                  <Checkbox
+                    name={this.state.controls.smsNotification.name}
+                    value={this.state.controls.smsNotification.value}
+                    withLabel={this.state.controls.smsNotification.withLabel}
+                    labelTitle={this.state.controls.smsNotification.labelTitle}
+                    checked={this.state.controls.smsNotification.checked}
+                    disabled={this.state.controls.smsNotification.disabled}
+                    modifierArr={
+                      this.state.controls.smsNotification.modifierArr
+                    }
+                    onChangeHandler={null}
+                  />
                 </div>
               </div>
             </LayoutColumn>
