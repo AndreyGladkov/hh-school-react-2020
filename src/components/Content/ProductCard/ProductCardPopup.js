@@ -45,22 +45,18 @@ export default class ProductCardPopup extends Component {
 
     const sizes = Object.entries(productDataSizes).map((size, index) => {
       /* size = ['size-value', 'size-availiable'] */
-      const inputId = index + 1;
 
       return (
-        <React.Fragment key={index}>
-          <Radio
-            name={"size"}
-            value={size[0]}
-            id={inputId}
-            disabled={!size[1]}
-            modifierArr={["sqared", "size"]}
-            onChangeHandler={e =>
-              this.setState({ sizeChecked: e.target.value })
-            }
-          />
-          <Label htmlFor={inputId} title={size[0]} disabled={!size[1]} />
-        </React.Fragment>
+        <Radio
+          key={index}
+          name={"size"}
+          value={size[0]}
+          withLabel={true}
+          labelTitle={size[0]}
+          disabled={!size[1]}
+          modifierArr={["sqared", "size"]}
+          onChangeHandler={e => this.setState({ sizeChecked: e.target.value })}
+        />
       );
     });
 

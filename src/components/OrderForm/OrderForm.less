@@ -1,0 +1,117 @@
+@import "./../common/variables";
+
+.form {
+  background-color: @color-light;
+  position: relative;
+
+  @media @screen-gt-s {
+    margin: 5px auto;
+    max-width: 768px;
+  }
+
+  @media @screen-gt-m {
+    max-width: 1010px;
+  }
+
+  &__heading {
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  &__input-block {
+    position: relative;
+    margin: 10px 0;
+  }
+
+  &__input-tel {
+    display: flex;
+    margin-top: 5px;
+    position: relative;
+  }
+
+  &__delivery-method {
+    display: flex;
+  }
+
+  &__delivery-address {
+    &_hide {
+      display: none;
+    }
+  }
+
+  &__textarea {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  &__payment-method {
+    margin-bottom: 10px;
+  }
+
+  &__button-submit {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 20px 0;
+  }
+
+  &__button-close {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+  }
+
+  &__product-card {
+    display: none;
+
+    @media @screen-gt-s {
+      display: flex;
+      flex-direction: column;
+      width: 290px;
+      margin-top: 136px;
+      float: right;
+    }
+  }
+
+  &_hide {
+    display: none;
+    @media @screen-gt-s {
+      display: block;
+    }
+  }
+}
+
+.orderForm {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 300ms linear;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &_active {
+    opacity: 1;
+  }
+}
+
+.form-error-block {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 10px 5px 5px;
+  margin: 0;
+  color: @color-dark;
+  background-color: @color-light;
+  border: 1px solid @color-light-grey;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  box-sizing: border-box;
+  font: 14px/ (@control-height - 18px) Arial, sans-serif;
+  text-align: left;
+
+  &__item {
+    list-style: none;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Label from "./../Label/Label;";
+import Label from "./../Label/Label";
 import "./Input.less";
 
 /* Компонент Input. Универсальный копонент Input (type==text) 
@@ -10,54 +10,48 @@ import "./Input.less";
 - labelTitle        | string |           (title для label)
 - placeholder       | string |           (значение placeholder)
 - readOnly          | bool |             (readonly true | false)
-- autocomplete      | bool |             (autocomplete true | false)
+- autocomplete      | string |           (autocomplete on | off)
 - modifierArr       | array of string|   (массив модификаторов input)
 - disabled          | bool |             (disabled true | false)
-- onChangeHandler   |function |          (обработчик изменения ввода)
+- onChangeHandler   | function |         (обработчик изменения ввода)
 - valid             | bool |             (валидный ли input true | false)
 - shouldValidate    | bool |             (нужна ли валидация true | false)
-- touched           | bool |             (работали ли с input true | false)
 - errorMessage      | string |           (сообщение ошибки в случае не пройденной валидации)
 */
 export default class Input extends Component {
   constructor(props) {
     super(props);
+    this.onChangeHandlerSelf = this.onChangeHandlerSelf.bind(this);
     this.state = {
+      id: Math.random(),
       name: props.name || "",
       value: props.value || "",
-      id: props.id || Math.random(),
-      withLabel: props.withLabel || "",
+      withLabel: props.withLabel || false,
       labelTitle: props.labelTitle || "",
       placeholder: props.placeholder || "",
       readOnly: props.readOnly || false,
-      autocomplete: props.autocomplete || false,
-      modifierArr: props.modifierArr || [""],
-      disabled: props.disabled || false,
+      modifierArr: props.modifierArr || [],
+      autocomplete: props.autocomplete || "off",
       onChangeHandler: props.onChangeHandler || null,
-      shouldValidate: props.shouldValidate || false,
-      valid: props.isValid || false,
-      touched: false,
-      validityFunctions: props.validityFunctions || [],
-      errorMessage: props.errorMessage || "Введите корректное значение"
+      touched: false
     };
   }
 
-  onChangeHandler(e) {
-    this.setState({ value: e.target.value });
-  }
+  /* Метод: обработчик изменения radio. Может вызывать внешний обработчик */
+  onChangeHandlerSelf(e) {
+    this.setState({ value: e.target.value, touched: true });
 
-  onBlurHandler() {
-    if (!this.state.isTouched) {
-      this.setState({ isTouched: true });
+    /* Использование внешнего обработчика */
+    if (this.state.onChangeHandler) {
+      this.state.onChangeHandler(e);
     }
   }
 
+  /* Метод: проверка инпута на валидность */
   isInvalid() {
-    if (
-      this.state.isTouched &&
-      !this.state.isValid &&
-      this.state.shouldValidate
-    ) {
+    if (!this.props.shouldValidate) return;
+
+    if (this.state.touched && !this.props.valid && this.props.shouldValidate) {
       return true;
     }
     return false;
@@ -67,36 +61,39 @@ export default class Input extends Component {
     let className = "input";
     let modifierArr = [...this.state.modifierArr];
 
-    const inputIsInvalid = this.isInvalid();
-
+    const inputIsInvalid = this.props.shouldValidate ? this.isInvalid() : false;
     if (inputIsInvalid) {
       modifierArr.push("invalid");
     }
-    modifierArr.forEach(
-      (modifier, i) => (modifierArr[i] = `${className}_${modifier}`)
-    );
-    className += " " + modifierArr.join(" ");
+
+    if (modifierArr.length) {
+      modifierArr.forEach(
+        (modifier, i) => (modifierArr[i] = `${className}_${modifier}`)
+      );
+      className += " " + modifierArr.join(" ");
+    }
 
     return (
       <div className="input-block">
         <input
           className={className}
+          id={this.state.id}
           name={this.state.name}
           value={this.state.value}
           placeholder={this.state.placeholder}
           readOnly={this.state.readOnly}
-          autocomplete={this.state.autocomplete}
-          disabled={this.state.disabled}
-          onChange={this.onChangeHandler.bind(this)}
-          id={this.state.id}
-          onBlur={this.onBlurHandler.bind(this)}
+          autoComplete={this.state.autocomplete}
+          onChange={this.onChangeHandlerSelf}
+          disabled={this.props.disabled}
         ></input>
-        {inputIsInvalid ? <span>{this.state.errorMessage}</span> : null}
+        {inputIsInvalid ? (
+          <span className="input__error">{this.props.errorMessage}</span>
+        ) : null}
         {this.state.withLabel ? (
           <Label
             htmlFor={this.state.id}
             title={this.state.labelTitle}
-            disabled={this.state.disabled}
+            disabled={this.props.disabled}
           />
         ) : null}
       </div>

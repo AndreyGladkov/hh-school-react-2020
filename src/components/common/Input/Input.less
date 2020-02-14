@@ -1,8 +1,12 @@
 @import "./../variables";
 
 .input-block {
+  display: flex;
+  flex-flow: column;
+
   .input {
     box-sizing: border-box;
+
     width: 100%;
     height: @control-height;
     display: inline-block;
@@ -35,6 +39,12 @@
 
     &_tel-number-code {
       width: 100%;
+    }
+
+    &__error {
+      color: @color-red;
+      padding-left: 1px;
+      font: normal 12px/18px @font-family-heading;
     }
   }
 }
