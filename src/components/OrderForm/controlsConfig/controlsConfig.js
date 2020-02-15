@@ -92,6 +92,7 @@ export const controlsConfig = {
   },
   deliveryMethod: {
     checkedValue: "deliveryPickup",
+    required: true,
     selfPickup: {
       name: "deliveryMethod",
       value: "selfPickup",
@@ -100,9 +101,7 @@ export const controlsConfig = {
       disabled: false,
       checked: false,
       modifierArr: ["sqared"],
-      onChangeHandler: null,
-
-      required: true
+      onChangeHandler: null
     },
 
     deliveryPickup: {
@@ -113,13 +112,12 @@ export const controlsConfig = {
       disabled: false,
       checked: true,
       modifierArr: ["sqared"],
-      onChangeHandler: null,
-
-      required: true
+      onChangeHandler: null
     }
   },
   paymentMethod: {
     checkedValue: "paymentOnline",
+    required: true,
     paymentOnline: {
       name: "paymentMethod",
       value: "paymentOnline",
@@ -128,9 +126,7 @@ export const controlsConfig = {
       disabled: false,
       checked: true,
       modifierArr: ["circle"],
-      onChangeHandler: null,
-
-      required: true
+      onChangeHandler: null
     },
     paymentCash: {
       name: "paymentMethod",
@@ -140,9 +136,7 @@ export const controlsConfig = {
       disabled: false,
       checked: false,
       modifierArr: ["circle"],
-      onChangeHandler: null,
-
-      required: true
+      onChangeHandler: null
     },
     paymentCard: {
       name: "paymentMethod",
@@ -152,14 +146,12 @@ export const controlsConfig = {
       disabled: false,
       checked: false,
       modifierArr: ["circle"],
-      onChangeHandler: null,
-
-      required: true
+      onChangeHandler: null
     }
   },
   smsNotification: {
     name: "smsNotification",
-    value: "",
+    value: true,
     withLabel: true,
     labelTitle: "Хочу получать SMS уведомления",
     disabled: false,

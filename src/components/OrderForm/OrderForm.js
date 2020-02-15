@@ -19,7 +19,8 @@ export default class OrderForm extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
       isOpened: props.isOpened || true,
-      controls: controlsConfig
+      controls: controlsConfig,
+      isValid: false
     };
   }
 
@@ -51,11 +52,32 @@ export default class OrderForm extends Component {
       controls[control.name].checked = !controls[control.name].checked;
     }
 
-    this.setState({ controls });
+    /* Проверка валидности формы для отправки */
+    const isValid = this.isValid() ? true : false;
+    this.setState({ controls, isValid });
+  }
+
+  /* Метод: проверка на валидность форму перед отправкой */
+  isValid() {
+    const controls = { ...this.state.controls };
+    for (let control in controls) {
+      if (
+        "required" in controls[control] &&
+        (controls[control].value === "" ||
+          controls[control].checkedValue === "")
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /* Метод: отправка формы (console.log полей) */
+  sendForm() {
+    console.log(this.state.controls);
   }
 
   render() {
-    console.log(this.state.controls);
     /* ФИО, email*/
     const mainContacts = ["fullName", "email"];
     const mainContactsControlsJSX = mainContacts.map((controlName, index) => {
@@ -242,6 +264,18 @@ export default class OrderForm extends Component {
                       onChangeHandler={this.onChangeHandler}
                     />
                   </div>
+                </div>
+
+                <div className="form__button-submit">
+                  <Button
+                    title={"Оформить заказ"}
+                    modifierArr={["submit", "blue", "form"]}
+                    onClickHandler={e => {
+                      e.preventDefault();
+                      this.sendForm();
+                    }}
+                    disabled={this.state.isValid ? false : true}
+                  />
                 </div>
               </LayoutColumn>
             </LayoutRow>
