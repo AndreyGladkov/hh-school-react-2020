@@ -6,6 +6,7 @@ const axios = require("axios");
 /* Компонент Select 
 Принимает: 
 - value             | string |           (значение)
+- name              | string |           (имя)
 - modifierArr       | array of string|   (массив модификаторов)
 - onClickHandler    | function |         (обработчик клика)
 */
@@ -18,6 +19,7 @@ export default class Select extends Component {
       dataFromServer: null,
       apiAddress: props.apiAddress || "https://api.hh.ru/areas/113",
       value: props.value || "Город",
+      name: props.name || "cityLocataion",
       modifierArr: props.modifierArr || [],
       onClickHandler: props.onClickHandler || null
     };
@@ -38,11 +40,14 @@ export default class Select extends Component {
 
   /* Метод: обработчик клика по select. Может вызывать внешний обработчик */
   onClickHandlerSelf(e) {
-    this.setState({ isOpened: !this.state.isOpened });
-
+    const value = e.target.innerHTML;
+    this.setState({ value, isOpened: !this.state.isOpened });
     /* Использование внешнего обработчика */
     if (this.state.onClickHandler) {
-      this.state.onClickHandler(e);
+      const syntheticEvent = {
+        target: { name: this.state.name, value }
+      };
+      this.state.onClickHandler(syntheticEvent);
     }
   }
 
@@ -67,7 +72,7 @@ export default class Select extends Component {
             key={index}
             className="options-container__item"
             value={town.name}
-            onClick={() => this.setState({ value: town.name, isOpened: false })}
+            onClick={this.onClickHandlerSelf}
           >
             {town.name}
           </div>
@@ -79,7 +84,10 @@ export default class Select extends Component {
 
     return (
       <div className={className}>
-        <div className={"select"} onClick={this.onClickHandlerSelf}>
+        <div
+          className={"select"}
+          onClick={() => this.setState({ isOpened: !this.state.isOpened })}
+        >
           {this.state.value}
         </div>
         {this.state.isOpened ? optionsContainer : null}

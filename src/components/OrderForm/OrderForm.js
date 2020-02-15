@@ -9,7 +9,7 @@ import {
   LayoutWrapper,
   LayoutColumn
 } from "./../common/Layout/Layout";
-import { validators } from "./validators/validators";
+import { controlsConfig } from "./controlsConfig/controlsConfig";
 import "./OrderForm.less";
 
 export default class OrderForm extends Component {
@@ -17,179 +17,8 @@ export default class OrderForm extends Component {
     super(props);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
-      controls: {
-        fullName: {
-          name: "fullName",
-          value: "",
-          withLabel: false,
-          labelTitle: "",
-          placeholder: "ФИО",
-          readOnly: false,
-          autocomplete: "off",
-          modifierArr: [],
-          disabled: false,
-          onChangeHandler: this.onChangeHandler,
-          valid: false,
-          shouldValidate: true,
-          errorMessage: "",
-
-          required: true,
-          validityFunctions: [validators.isEmptyField, validators.isBigString]
-        },
-        email: {
-          name: "email",
-          value: "",
-          withLabel: false,
-          labelTitle: "",
-          placeholder: "Электронная почта",
-          readOnly: false,
-          autocomplete: "off",
-          modifierArr: [],
-          disabled: false,
-          onChangeHandler: this.onChangeHandler,
-          valid: false,
-          shouldValidate: true,
-          errorMessage: "",
-
-          required: true,
-          validityFunctions: [validators.isNotEmail]
-        },
-        countryCode: {
-          name: "countryCode",
-          value: "+7",
-          withLabel: false,
-          labelTitle: "",
-          placeholder: "",
-          readonly: true,
-          autocomplete: "off",
-          modifierArr: ["tel-country-code"],
-          disabled: false,
-          onChangeHandler: null,
-          valid: true,
-          shouldValidate: false,
-          errorMessage: "",
-
-          required: true,
-          validityFunctions: []
-        },
-        operatorCode: {
-          name: "operatorCode",
-          value: "",
-          withLabel: false,
-          labelTitle: "",
-          placeholder: "Код",
-          readOnly: false,
-          autocomplete: "off",
-          modifierArr: ["tel-operator-code"],
-          disabled: false,
-          onChangeHandler: this.onChangeHandler,
-          valid: false,
-          shouldValidate: true,
-
-          required: true,
-          validityFunctions: [validators.isNotOperatorCode]
-        },
-        telNumber: {
-          name: "telNumber",
-          value: "",
-          withLabel: false,
-          labelTitle: "",
-          placeholder: "Номер",
-          readOnly: false,
-          autocomplete: "off",
-          modifierArr: ["tel-number-code"],
-          disabled: false,
-          onChangeHandler: this.onChangeHandler,
-          valid: false,
-          shouldValidate: true,
-
-          required: true,
-          validityFunctions: [validators.isNotTelNumber]
-        },
-        selfPickup: {
-          name: "deliveryMethod",
-          value: "selfPickup",
-          withLabel: true,
-          labelTitle: "Самовывоз",
-          disabled: false,
-          checked: false,
-          modifierArr: ["sqared"],
-          onChangeHandler: this.onChangeHandler,
-
-          required: true
-        },
-        deliveryPickup: {
-          name: "deliveryMethod",
-          value: "deliveryPickup",
-          withLabel: true,
-          labelTitle: "Доставка",
-          disabled: false,
-          checked: true,
-          modifierArr: ["sqared"],
-          onChangeHandler: this.onChangeHandler,
-
-          required: true
-        },
-        paymentOnline: {
-          name: "paymentMethod",
-          value: "paymentOnline",
-          withLabel: true,
-          labelTitle: "Онлайн-оплата",
-          disabled: false,
-          checked: true,
-          modifierArr: ["circle"],
-          onChangeHandler: null,
-
-          required: true
-        },
-        paymentCash: {
-          name: "paymentMethod",
-          value: "paymentCash",
-          withLabel: true,
-          labelTitle: "Наличными",
-          disabled: false,
-          checked: false,
-          modifierArr: ["circle"],
-          onChangeHandler: null,
-
-          required: true
-        },
-        paymentCard: {
-          name: "paymentMethod",
-          value: "paymentCard",
-          withLabel: true,
-          labelTitle: "Картой при получении",
-          disabled: false,
-          checked: false,
-          modifierArr: ["circle"],
-          onChangeHandler: null,
-
-          required: true
-        },
-        smsNotification: {
-          name: "smsNotification",
-          value: "",
-          withLabel: true,
-          labelTitle: "Хочу получать SMS уведомления",
-          disabled: false,
-          checked: true,
-          modifierArr: [],
-          onChangeHandler: null,
-
-          required: true
-        },
-        cityLocataion: {
-          value: "",
-          modifierArr: [],
-          onClickHandler: e => {
-            const controls = { ...this.state.controls };
-            controls.cityLocataion.value = e.target.innerHTML;
-            this.setState({ controls });
-          },
-          apiAddress: "https://api.hh.ru/areas/113",
-          required: true
-        }
-      }
+      isOpened: props.isOpened || true,
+      controls: controlsConfig
     };
   }
 
@@ -197,15 +26,29 @@ export default class OrderForm extends Component {
   onChangeHandler(e) {
     const control = e.target;
     const controls = { ...this.state.controls };
+    controls[control.name].value = control.value;
 
-    const invalidValidator = controls[
-      control.name
-    ].validityFunctions.find(validator => validator.func(control));
+    /* обработка контроллов, требующих валидации */
+    if ("shouldValidate" in controls[control.name]) {
+      const invalidValidator = controls[
+        control.name
+      ].validityFunctions.find(validator => validator.func(control));
 
-    controls[control.name].valid = invalidValidator ? false : true;
-    controls[control.name].errorMessage = invalidValidator
-      ? invalidValidator.errorMessage
-      : "";
+      controls[control.name].valid = invalidValidator ? false : true;
+      controls[control.name].errorMessage = invalidValidator
+        ? invalidValidator.errorMessage
+        : "";
+    }
+
+    /* обработка контроллов, представляющих собой группу выбора(radio-inputs) и имеющих checkedValue */
+    if ("checkedValue" in controls[control.name]) {
+      controls[control.name].checkedValue = control.value;
+    }
+
+    /* обработка контроллов имеющих параметр checked (ckeckbox-inputs) */
+    if ("checked" in controls[control.name]) {
+      controls[control.name].checked = !controls[control.name].checked;
+    }
 
     this.setState({ controls });
   }
@@ -259,128 +102,139 @@ export default class OrderForm extends Component {
     });
 
     /* Cпособ доставки */
+    const deliveryGroup = "deliveryMethod";
     const deliveryMethods = ["selfPickup", "deliveryPickup"];
     const deliveryMethodsJSX = deliveryMethods.map((controlName, index) => {
       return (
         <div className="form__radio-button" key={index}>
           <Radio
-            name={this.state.controls[controlName].name}
-            value={this.state.controls[controlName].value}
-            withLabel={this.state.controls[controlName].withLabel}
-            labelTitle={this.state.controls[controlName].labelTitle}
-            checked={this.state.controls[controlName].checked}
-            disabled={this.state.controls[controlName].disabled}
-            modifierArr={this.state.controls[controlName].modifierArr}
-            onChangeHandler={null}
+            name={this.state.controls[deliveryGroup][controlName].name}
+            value={this.state.controls[deliveryGroup][controlName].value}
+            withLabel={
+              this.state.controls[deliveryGroup][controlName].withLabel
+            }
+            labelTitle={
+              this.state.controls[deliveryGroup][controlName].labelTitle
+            }
+            checked={this.state.controls[deliveryGroup][controlName].checked}
+            disabled={this.state.controls[deliveryGroup][controlName].disabled}
+            modifierArr={
+              this.state.controls[deliveryGroup][controlName].modifierArr
+            }
+            onChangeHandler={this.onChangeHandler}
           />
         </div>
       );
     });
 
     /* Способ оплаты */
+    const paymentGroup = "paymentMethod";
     const paymentMethods = ["paymentOnline", "paymentCash", "paymentCard"];
     const paymentMethodsJSX = paymentMethods.map((controlName, index) => {
       return (
         <div className="form__payment-method" key={index}>
           <Radio
-            name={this.state.controls[controlName].name}
-            value={this.state.controls[controlName].value}
-            withLabel={this.state.controls[controlName].withLabel}
-            labelTitle={this.state.controls[controlName].labelTitle}
-            checked={this.state.controls[controlName].checked}
-            disabled={this.state.controls[controlName].disabled}
-            modifierArr={this.state.controls[controlName].modifierArr}
-            onChangeHandler={null}
+            name={this.state.controls[paymentGroup][controlName].name}
+            value={this.state.controls[paymentGroup][controlName].value}
+            withLabel={this.state.controls[paymentGroup][controlName].withLabel}
+            labelTitle={
+              this.state.controls[paymentGroup][controlName].labelTitle
+            }
+            checked={this.state.controls[paymentGroup][controlName].checked}
+            disabled={this.state.controls[paymentGroup][controlName].disabled}
+            modifierArr={
+              this.state.controls[paymentGroup][controlName].modifierArr
+            }
+            onChangeHandler={this.onChangeHandler}
           />
         </div>
       );
     });
 
-    const logControls = Object.values({ ...this.state.controls }).map(
-      control => {
-        if (control.required) {
-          if (control.checked === undefined || control.checked === true) {
-            return [control.name, control.value];
-          }
-          return null;
-        }
-      }
-    );
-    console.log(logControls);
-    return (
-      <form className="form">
-        <LayoutWrapper>
-          <div className="form__button-close">
-            <Button
-              title={"Закрыть"}
-              type="icon"
-              modifierArr={["close"]}
-              onClickHandler={e => {
-                e.preventDefault();
-                console.log("form is closed");
-              }}
-            />
-          </div>
-          <LayoutRow>
-            <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
-              <div className="form__section">
-                <div className="form__delivery-address">
-                  <h4 className="heading heading_level-4">Адрес</h4>
-                  <Select
-                    value={this.state.controls.cityLocataion.value}
-                    modifierArr={this.state.controls.cityLocataion.modifierArr}
-                    onClickHandler={
-                      this.state.controls.cityLocataion.onClickHandler
-                    }
-                    apiAddress={this.state.controls.cityLocataion.apiAddress}
-                  />
+    if (this.state.isOpened) {
+      return (
+        <form className="form">
+          <LayoutWrapper>
+            <div className="form__button-close">
+              <Button
+                title={"Закрыть"}
+                type="icon"
+                modifierArr={["close"]}
+                onClickHandler={e => {
+                  e.preventDefault();
+                  this.setState({ isOpened: false });
+                }}
+              />
+            </div>
+            <LayoutRow>
+              <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
+                <div className="form__section">
+                  <div className="form__input-main-contacts">
+                    <h1 className="heading heading_level-1">
+                      Оформление заказа
+                    </h1>
+                    <h4 className="heading heading_level-4">Контактное лицо</h4>
+                    {mainContactsControlsJSX}
+                    <div className="form__input-tel">{telephoneJSX}</div>
+                  </div>
                 </div>
-              </div>
 
-              <div className="form__section">
-                <div className="form__input-main-contacts">
-                  <h1 className="heading heading_level-1">Оформление заказа</h1>
-                  <h4 className="heading heading_level-4">Контактное лицо</h4>
-                  {mainContactsControlsJSX}
-                  <div className="form__input-tel">{telephoneJSX}</div>
+                <div className="form__section">
+                  <h4 className="heading heading_level-4">
+                    Способ получения заказа
+                  </h4>
+                  <div className="form__delivery-method">
+                    {deliveryMethodsJSX}
+                  </div>
                 </div>
-              </div>
-              <div className="form__section">
-                <h4 className="heading heading_level-4">
-                  Способ получения заказа
-                </h4>
-                <div className="form__delivery-method">
-                  {deliveryMethodsJSX}
-                </div>
-              </div>
-              <div className="form__section">
-                <div className="form__payment-methods">
-                  <h4 className="heading heading_level-4">Оплата</h4>
-                  {paymentMethodsJSX}
-                </div>
-              </div>
 
-              <div className="form__section">
-                <div className="form__notification">
-                  <h4 className="heading heading_level-4">Уведомления</h4>
-                  <Checkbox
-                    name={this.state.controls.smsNotification.name}
-                    value={this.state.controls.smsNotification.value}
-                    withLabel={this.state.controls.smsNotification.withLabel}
-                    labelTitle={this.state.controls.smsNotification.labelTitle}
-                    checked={this.state.controls.smsNotification.checked}
-                    disabled={this.state.controls.smsNotification.disabled}
-                    modifierArr={
-                      this.state.controls.smsNotification.modifierArr
-                    }
-                    onChangeHandler={null}
-                  />
+                <div className="form__section">
+                  <div className="form__delivery-address">
+                    <h4 className="heading heading_level-4">Адрес</h4>
+                    <Select
+                      value={this.state.controls.cityLocataion.value}
+                      modifierArr={
+                        this.state.controls.cityLocataion.modifierArr
+                      }
+                      onClickHandler={this.onChangeHandler}
+                      apiAddress={this.state.controls.cityLocataion.apiAddress}
+                    />
+                  </div>
                 </div>
-              </div>
-            </LayoutColumn>
-          </LayoutRow>
-        </LayoutWrapper>
-      </form>
-    );
+
+                <div className="form__section">
+                  <div className="form__payment-methods">
+                    <h4 className="heading heading_level-4">Оплата</h4>
+                    {paymentMethodsJSX}
+                  </div>
+                </div>
+
+                <div className="form__section">
+                  <div className="form__notification">
+                    <h4 className="heading heading_level-4">Уведомления</h4>
+                    <Checkbox
+                      name={this.state.controls.smsNotification.name}
+                      value={this.state.controls.smsNotification.value}
+                      withLabel={this.state.controls.smsNotification.withLabel}
+                      labelTitle={
+                        this.state.controls.smsNotification.labelTitle
+                      }
+                      checked={this.state.controls.smsNotification.checked}
+                      disabled={this.state.controls.smsNotification.disabled}
+                      modifierArr={
+                        this.state.controls.smsNotification.modifierArr
+                      }
+                      onChangeHandler={this.onChangeHandler}
+                    />
+                  </div>
+                </div>
+              </LayoutColumn>
+            </LayoutRow>
+          </LayoutWrapper>
+        </form>
+      );
+    } else {
+      return null;
+    }
   }
 }
