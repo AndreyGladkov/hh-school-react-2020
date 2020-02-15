@@ -177,5 +177,14 @@ export const controlsConfig = {
     apiAddress: "https://api.hh.ru/areas/113",
 
     required: true
+  },
+  addressExpaned: {
+    placeholder: "Адрес",
+    name: "addressExpaned",
+    value: "",
+    modifierArr: [],
+    onChangeHandler: null,
+
+    required: true
   }
 };

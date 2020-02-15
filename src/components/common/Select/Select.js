@@ -17,9 +17,9 @@ export default class Select extends Component {
     this.state = {
       isOpened: false,
       dataFromServer: null,
-      apiAddress: props.apiAddress || "https://api.hh.ru/areas/113",
-      value: props.value || "Город",
-      name: props.name || "cityLocataion",
+      apiAddress: props.apiAddress || "",
+      value: props.value || "",
+      name: props.name || "",
       modifierArr: props.modifierArr || [],
       onClickHandler: props.onClickHandler || null
     };

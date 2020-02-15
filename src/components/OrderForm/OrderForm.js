@@ -4,6 +4,7 @@ import Radio from "./../common/Radio/Radio";
 import Button from "./../common/Button/Button";
 import Checkbox from "./../common/Checkbox/Checkbox";
 import Select from "./../common/Select/Select";
+import Textarea from "./../common/Textarea/Textarea";
 import {
   LayoutRow,
   LayoutWrapper,
@@ -54,6 +55,7 @@ export default class OrderForm extends Component {
   }
 
   render() {
+    console.log(this.state.controls);
     /* ФИО, email*/
     const mainContacts = ["fullName", "email"];
     const mainContactsControlsJSX = mainContacts.map((controlName, index) => {
@@ -193,12 +195,25 @@ export default class OrderForm extends Component {
                     <h4 className="heading heading_level-4">Адрес</h4>
                     <Select
                       value={this.state.controls.cityLocataion.value}
+                      name={this.state.controls.cityLocataion.name}
                       modifierArr={
                         this.state.controls.cityLocataion.modifierArr
                       }
                       onClickHandler={this.onChangeHandler}
                       apiAddress={this.state.controls.cityLocataion.apiAddress}
                     />
+                    <div className="form__textarea">
+                      <Textarea
+                        placeholder={
+                          this.state.controls.addressExpaned.placeholder
+                        }
+                        name={this.state.controls.addressExpaned.name}
+                        modifierArr={
+                          this.state.controls.addressExpaned.modifierArr
+                        }
+                        onChangeHandler={this.onChangeHandler}
+                      />
+                    </div>
                   </div>
                 </div>
 
