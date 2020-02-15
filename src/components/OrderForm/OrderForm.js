@@ -3,6 +3,7 @@ import Input from "./../common/Input/Input";
 import Radio from "./../common/Radio/Radio";
 import Button from "./../common/Button/Button";
 import Checkbox from "./../common/Checkbox/Checkbox";
+import Select from "./../common/Select/Select";
 import {
   LayoutRow,
   LayoutWrapper,
@@ -176,6 +177,17 @@ export default class OrderForm extends Component {
           onChangeHandler: null,
 
           required: true
+        },
+        cityLocataion: {
+          value: "",
+          modifierArr: [],
+          onClickHandler: e => {
+            const controls = { ...this.state.controls };
+            controls.cityLocataion.value = e.target.innerHTML;
+            this.setState({ controls });
+          },
+          apiAddress: "https://api.hh.ru/areas/113",
+          required: true
         }
       }
     };
@@ -284,6 +296,17 @@ export default class OrderForm extends Component {
       );
     });
 
+    const logControls = Object.values({ ...this.state.controls }).map(
+      control => {
+        if (control.required) {
+          if (control.checked === undefined || control.checked === true) {
+            return [control.name, control.value];
+          }
+          return null;
+        }
+      }
+    );
+    console.log(logControls);
     return (
       <form className="form">
         <LayoutWrapper>
@@ -300,6 +323,20 @@ export default class OrderForm extends Component {
           </div>
           <LayoutRow>
             <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
+              <div className="form__section">
+                <div className="form__delivery-address">
+                  <h4 className="heading heading_level-4">Адрес</h4>
+                  <Select
+                    value={this.state.controls.cityLocataion.value}
+                    modifierArr={this.state.controls.cityLocataion.modifierArr}
+                    onClickHandler={
+                      this.state.controls.cityLocataion.onClickHandler
+                    }
+                    apiAddress={this.state.controls.cityLocataion.apiAddress}
+                  />
+                </div>
+              </div>
+
               <div className="form__section">
                 <div className="form__input-main-contacts">
                   <h1 className="heading heading_level-1">Оформление заказа</h1>
@@ -322,6 +359,7 @@ export default class OrderForm extends Component {
                   {paymentMethodsJSX}
                 </div>
               </div>
+
               <div className="form__section">
                 <div className="form__notification">
                   <h4 className="heading heading_level-4">Уведомления</h4>
