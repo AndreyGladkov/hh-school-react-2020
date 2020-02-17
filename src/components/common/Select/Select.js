@@ -40,6 +40,7 @@ export default class Select extends Component {
 
   /* Метод: обработчик клика по select. Может вызывать внешний обработчик */
   onClickHandlerSelf(e) {
+    e.nativeEvent.stopImmediatePropagation();
     const value = e.target.innerHTML;
     this.setState({ value, isOpened: !this.state.isOpened });
     /* Использование внешнего обработчика */
@@ -86,7 +87,9 @@ export default class Select extends Component {
       <div className={className}>
         <div
           className={"select"}
-          onClick={() => this.setState({ isOpened: !this.state.isOpened })}
+          onClick={e => {
+            this.setState({ isOpened: !this.state.isOpened });
+          }}
         >
           {this.state.value}
         </div>

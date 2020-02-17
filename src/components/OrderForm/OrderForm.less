@@ -75,38 +75,16 @@
   }
 }
 
-.orderForm {
-  position: absolute;
-  top: 0;
-  z-index: 100;
-  overflow: hidden;
-  opacity: 0;
+.form {
+  position: fixed;
+  /*   top: 0;
+ */
+  z-index: 10000;
+  overflow: auto;
   transition: all 300ms linear;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  &_active {
-    opacity: 1;
-  }
-}
-
-.form-error-block {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px 10px 5px 5px;
-  margin: 0;
-  color: @color-dark;
-  background-color: @color-light;
-  border: 1px solid @color-light-grey;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  box-sizing: border-box;
-  font: 14px/ (@control-height - 18px) Arial, sans-serif;
-  text-align: left;
-
-  &__item {
-    list-style: none;
-  }
+  height: 100vh;
 }

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+
 import { LayoutColumn } from "../../common/Layout/Layout";
 import { GlobalContext } from "../../../GlobalContext";
+import ProductCardPopup from "./ProductCardPopup/ProductCardPopup";
+import Modal from "../../common/Modal/Modal";
+
 import "./ProductCard.less";
-import ProductCardPopup from "./ProductCardPopup";
-import ReactDOM from "react-dom";
 
 /* Компонент ProductCard.
 Принимает: 
@@ -14,6 +16,9 @@ export default class ProductCard extends Component {
   constructor(props) {
     super(props);
     this.onWindowResize = this.handleWindowResize.bind(this);
+    this.onCardClickHandler = this.onCardClickHandler.bind(this);
+    this.closeOpenedCard = this.closeOpenedCard.bind(this);
+    this.setBodyOverflow = this.setBodyOverflow.bind(this);
     this.state = {
       productData: props.productData,
       isCardOpened: false,
@@ -32,13 +37,32 @@ export default class ProductCard extends Component {
     }
   }
 
+  setBodyOverflow() {
+    /* При открытии попапа для мобилок запретить скроллинг body */
+    if (this.state.isMobile && this.state.isCardOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }
+
+  componentDidUpdate() {
+    /* Проверить, открыта ли карточка-попап как модальное окно(потребуется body overflow hidden) */
+    this.setBodyOverflow();
+  }
+
   componentDidMount() {
+    console.log("Did mount");
+
     window.addEventListener("resize", this.onWindowResize);
     this.handleWindowResize();
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.onWindowResize);
+
+    /* Для верности сбросим overflow у body при размонтировании */
+    document.body.style.overflow = "";
   }
   /* Метод: возвращает JSX основной карточки продукта (без размеров и т.д.) */
   getProductCard(productData) {
@@ -58,10 +82,7 @@ export default class ProductCard extends Component {
 
     return (
       <React.Fragment>
-        <div
-          className="product-card"
-          onClick={this.onCardClickHandler.bind(this)}
-        >
+        <div className="product-card" onClick={this.onCardClickHandler}>
           <div className="product-card__image-container">
             <img
               className="product-card__image"
@@ -76,11 +97,12 @@ export default class ProductCard extends Component {
     );
   }
 
-  /* Метод: обработчик клика по карточке продукта (попап) */
+  /* Метод: обработчик клика по карточке продукта (попапа) */
   onCardClickHandler() {
     if (this.state.isCardOpened) return;
     this.setState({ isCardOpened: true });
   }
+
   /* Метод: закрытие открытой карточки продукта (попапа) */
   closeOpenedCard() {
     this.setState({ isCardOpened: false });
@@ -95,27 +117,19 @@ export default class ProductCard extends Component {
       <ProductCardPopup
         productCardBlock={productCardJSX}
         productData={this.state.productData}
-        closeOpenedCard={this.closeOpenedCard.bind(this)}
+        closeOpenedCard={this.closeOpenedCard}
       />
     );
-
-    /* При открытии попапа для мобилок запретить скроллинг body */
-    if (this.state.isMobile && this.state.isCardOpened) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
 
     return (
       <LayoutColumn sColumnQnt={"1"} mColumnQnt={"2"} lColumnQnt={"4"}>
         {productCardJSX}
+
         {!this.state.isMobile && this.state.isCardOpened && productCardPopupJSX}
-        {this.state.isMobile &&
-          this.state.isCardOpened &&
-          ReactDOM.createPortal(
-            <div className="modal">{productCardPopupJSX}</div>,
-            document.body
-          )}
+
+        {this.state.isMobile && this.state.isCardOpened && (
+          <Modal>{productCardPopupJSX}</Modal>
+        )}
       </LayoutColumn>
     );
   }

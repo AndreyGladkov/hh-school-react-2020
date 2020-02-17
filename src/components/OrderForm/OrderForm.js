@@ -18,9 +18,11 @@ export default class OrderForm extends Component {
     super(props);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
-      isOpened: props.isOpened || true,
+      isOpened: props.isOpened || false,
       controls: controlsConfig,
-      isValid: false
+      isValid: false,
+      getProductCard: props.getProductCard || null,
+      sizeChecked: props.sizeChecked || ""
     };
   }
 
@@ -74,7 +76,10 @@ export default class OrderForm extends Component {
 
   /* Метод: отправка формы (console.log полей) */
   sendForm() {
-    console.log(this.state.controls);
+    setTimeout(() => {
+      console.log(this.state);
+      this.setState({ isOpened: false });
+    });
   }
 
   render() {
@@ -272,10 +277,23 @@ export default class OrderForm extends Component {
                     modifierArr={["submit", "blue", "form"]}
                     onClickHandler={e => {
                       e.preventDefault();
+                      let sizeChecked = document.querySelector(
+                        ".product-card__sizes input:checked"
+                      );
+                      if (sizeChecked) {
+                        sizeChecked = sizeChecked.value;
+                      }
+                      this.setState({ sizeChecked });
                       this.sendForm();
                     }}
                     disabled={this.state.isValid ? false : true}
                   />
+                </div>
+              </LayoutColumn>
+
+              <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"5"}>
+                <div className="form__product-card">
+                  {this.state.getProductCard}
                 </div>
               </LayoutColumn>
             </LayoutRow>
