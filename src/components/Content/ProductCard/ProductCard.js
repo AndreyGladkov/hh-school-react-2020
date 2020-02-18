@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-
 import { LayoutColumn } from "../../common/Layout/Layout";
 import { GlobalContext } from "../../../GlobalContext";
-import ProductCardPopup from "./ProductCardPopup/ProductCardPopup";
+import ProductCardPopup from "../ProductCardPopup/ProductCardPopup";
 import Modal from "../../common/Modal/Modal";
-
 import "./ProductCard.less";
 
 /* Компонент ProductCard.
@@ -19,16 +17,19 @@ export default class ProductCard extends Component {
     this.onCardClickHandler = this.onCardClickHandler.bind(this);
     this.closeOpenedCard = this.closeOpenedCard.bind(this);
     this.setBodyOverflow = this.setBodyOverflow.bind(this);
+
     this.state = {
       productData: props.productData,
       isCardOpened: false,
       isMobile: false,
-      mobileSize: 768
+      mobileSize: 768,
+      orderForm: null
     };
   }
 
   static contextType = GlobalContext;
 
+  /* Метод: изменения состояния в зависимости от размера экрана */
   handleWindowResize() {
     if (window.innerWidth >= this.state.mobileSize) {
       this.setState({ isMobile: false });
@@ -37,6 +38,8 @@ export default class ProductCard extends Component {
     }
   }
 
+  /* Метод: если попап для мобилок, то 
+  потребуется body overflow hidden */
   setBodyOverflow() {
     /* При открытии попапа для мобилок запретить скроллинг body */
     if (this.state.isMobile && this.state.isCardOpened) {
@@ -47,22 +50,16 @@ export default class ProductCard extends Component {
   }
 
   componentDidUpdate() {
-    /* Проверить, открыта ли карточка-попап как модальное окно(потребуется body overflow hidden) */
     this.setBodyOverflow();
   }
 
   componentDidMount() {
-    console.log("Did mount");
-
     window.addEventListener("resize", this.onWindowResize);
     this.handleWindowResize();
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.onWindowResize);
-
-    /* Для верности сбросим overflow у body при размонтировании */
-    document.body.style.overflow = "";
   }
   /* Метод: возвращает JSX основной карточки продукта (без размеров и т.д.) */
   getProductCard(productData) {
@@ -81,19 +78,20 @@ export default class ProductCard extends Component {
     );
 
     return (
-      <React.Fragment>
-        <div className="product-card" onClick={this.onCardClickHandler}>
-          <div className="product-card__image-container">
-            <img
-              className="product-card__image"
-              src={`${this.context.imagesPath}${productData.image}`}
-              alt={productData.name}
-            />
-          </div>
-          <div className="product-card__name">{productData.name}</div>
-          {priceBlock}
+      <div className="product-card" onClick={this.onCardClickHandler}>
+        <div className="product-card__image-container">
+          <img
+            className="product-card__image"
+            src={`${this.context.imagesPath}${productData.image}`}
+            alt={productData.name}
+          />
         </div>
-      </React.Fragment>
+        {productData.salePrice ? (
+          <div className="product-card__sale">sale</div>
+        ) : null}
+        <div className="product-card__name">{productData.name}</div>
+        {priceBlock}
+      </div>
     );
   }
 
@@ -121,6 +119,11 @@ export default class ProductCard extends Component {
       />
     );
 
+    /*
+      Карточка продукта рендерится всегда -  {productCardJSX}.
+      Если не моб. и карточка открыта - показать попап в том же DOM-контейнере, где и карточка продукта.
+      Если моб. и карточка открыта - показать попап в модальном окне. 
+    */
     return (
       <LayoutColumn sColumnQnt={"1"} mColumnQnt={"2"} lColumnQnt={"4"}>
         {productCardJSX}

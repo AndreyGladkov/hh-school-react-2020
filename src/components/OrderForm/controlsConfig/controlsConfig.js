@@ -92,7 +92,7 @@ export const controlsConfig = {
   },
   deliveryMethod: {
     checkedValue: "deliveryPickup",
-    required: true,
+    required: false,
     selfPickup: {
       name: "deliveryMethod",
       value: "selfPickup",
@@ -117,7 +117,7 @@ export const controlsConfig = {
   },
   paymentMethod: {
     checkedValue: "paymentOnline",
-    required: true,
+    required: false,
     paymentOnline: {
       name: "paymentMethod",
       value: "paymentOnline",
@@ -159,7 +159,7 @@ export const controlsConfig = {
     modifierArr: [],
     onChangeHandler: null,
 
-    required: true
+    required: false
   },
   cityLocataion: {
     name: "cityLocataion",
@@ -168,7 +168,7 @@ export const controlsConfig = {
     onClickHandler: null,
     apiAddress: "https://api.hh.ru/areas/113",
 
-    required: true
+    required: false
   },
   addressExpaned: {
     placeholder: "Адрес",
@@ -177,6 +177,6 @@ export const controlsConfig = {
     modifierArr: [],
     onChangeHandler: null,
 
-    required: true
+    required: false
   }
 };

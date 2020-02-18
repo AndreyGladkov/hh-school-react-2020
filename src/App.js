@@ -48,7 +48,6 @@ export default class App extends React.Component {
           <Content productDataArr={this.state.dataFromServer} />
           <Features />
           <Footer />
-          <OrderForm />
         </React.Fragment>
       );
     } else if (this.state.appStatus === "not ready") {

@@ -13,17 +13,40 @@ import {
 import { controlsConfig } from "./controlsConfig/controlsConfig";
 import "./OrderForm.less";
 
+/* Компонент OrderForm.
+Принимает: 
+- productCardJSX   | JSX object |   (готовый JSX карточки продукта (расширенный)  
+- sizeChecked      | bool |         (выбранный размер из предыдущего этапа заказа)
+- closeOpenedCard  | function |     (функция закрытия попапа формы от родительского компонента)
+*/
 export default class OrderForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
-      isOpened: props.isOpened || false,
       controls: controlsConfig,
       isValid: false,
-      getProductCard: props.getProductCard || null,
-      sizeChecked: props.sizeChecked || ""
+      productCardJSX: props.productCardJSX || null,
+      sizeChecked: props.sizeChecked || "",
+      closeOpenedCard: props.closeOpenedCard
     };
+  }
+
+  componentDidMount() {
+    document.body.style.overflow = "hidden";
+    /* Проверка валидности формы для отправки */
+    const isValid = this.isValid() ? true : false;
+    this.setState({ isValid });
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.sizeChecked !== prevProps.sizeChecked) {
+      this.setState({ sizeChecked: this.props.sizeChecked });
+    }
   }
 
   /* Метод: универсальный хэндлер для контроллов */
@@ -63,11 +86,7 @@ export default class OrderForm extends Component {
   isValid() {
     const controls = { ...this.state.controls };
     for (let control in controls) {
-      if (
-        "required" in controls[control] &&
-        (controls[control].value === "" ||
-          controls[control].checkedValue === "")
-      ) {
+      if (controls[control].required && !controls[control].valid) {
         return false;
       }
     }
@@ -76,10 +95,8 @@ export default class OrderForm extends Component {
 
   /* Метод: отправка формы (console.log полей) */
   sendForm() {
-    setTimeout(() => {
-      console.log(this.state);
-      this.setState({ isOpened: false });
-    });
+    console.log(this.state.controls, `sizeChecked: ${this.state.sizeChecked}`);
+    this.props.closeOpenedCard();
   }
 
   render() {
@@ -180,128 +197,121 @@ export default class OrderForm extends Component {
       );
     });
 
-    if (this.state.isOpened) {
-      return (
-        <form className="form">
-          <LayoutWrapper>
-            <div className="form__button-close">
-              <Button
-                title={"Закрыть"}
-                type="icon"
-                modifierArr={["close"]}
-                onClickHandler={e => {
-                  e.preventDefault();
-                  this.setState({ isOpened: false });
-                }}
-              />
-            </div>
-            <LayoutRow>
-              <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
-                <div className="form__section">
-                  <div className="form__input-main-contacts">
-                    <h1 className="heading heading_level-1">
-                      Оформление заказа
-                    </h1>
-                    <h4 className="heading heading_level-4">Контактное лицо</h4>
-                    {mainContactsControlsJSX}
-                    <div className="form__input-tel">{telephoneJSX}</div>
-                  </div>
+    return (
+      <form className="form">
+        <LayoutWrapper>
+          <div className="form__button-close">
+            <Button
+              title={"Закрыть"}
+              type="icon"
+              modifierArr={["close"]}
+              onClickHandler={e => {
+                e.preventDefault();
+                this.setState({ isOpened: false });
+                this.props.closeOpenedCard();
+              }}
+            />
+          </div>
+          <LayoutRow>
+            <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"7"}>
+              <div className="form__section">
+                <div className="form__input-main-contacts">
+                  <h1 className="heading heading_level-1">Оформление заказа</h1>
+                  <h4 className="heading heading_level-4">Контактное лицо</h4>
+                  {mainContactsControlsJSX}
+                  <div className="form__input-tel">{telephoneJSX}</div>
                 </div>
+              </div>
 
-                <div className="form__section">
-                  <h4 className="heading heading_level-4">
-                    Способ получения заказа
-                  </h4>
-                  <div className="form__delivery-method">
-                    {deliveryMethodsJSX}
-                  </div>
+              <div className="form__section">
+                <h4 className="heading heading_level-4">
+                  Способ получения заказа
+                </h4>
+                <div className="form__delivery-method">
+                  {deliveryMethodsJSX}
                 </div>
+              </div>
 
-                <div className="form__section">
-                  <div className="form__delivery-address">
-                    <h4 className="heading heading_level-4">Адрес</h4>
-                    <Select
-                      value={this.state.controls.cityLocataion.value}
-                      name={this.state.controls.cityLocataion.name}
-                      modifierArr={
-                        this.state.controls.cityLocataion.modifierArr
-                      }
-                      onClickHandler={this.onChangeHandler}
-                      apiAddress={this.state.controls.cityLocataion.apiAddress}
-                    />
-                    <div className="form__textarea">
-                      <Textarea
-                        placeholder={
-                          this.state.controls.addressExpaned.placeholder
-                        }
-                        name={this.state.controls.addressExpaned.name}
+              {this.state.controls.deliveryMethod.checkedValue ===
+                "deliveryPickup" && (
+                <React.Fragment>
+                  <div className="form__section">
+                    <div className="form__delivery-address">
+                      <h4 className="heading heading_level-4">Адрес</h4>
+                      <Select
+                        value={this.state.controls.cityLocataion.value}
+                        name={this.state.controls.cityLocataion.name}
                         modifierArr={
-                          this.state.controls.addressExpaned.modifierArr
+                          this.state.controls.cityLocataion.modifierArr
                         }
-                        onChangeHandler={this.onChangeHandler}
+                        onClickHandler={this.onChangeHandler}
+                        apiAddress={
+                          this.state.controls.cityLocataion.apiAddress
+                        }
                       />
+                      <div className="form__textarea">
+                        <Textarea
+                          placeholder={
+                            this.state.controls.addressExpaned.placeholder
+                          }
+                          name={this.state.controls.addressExpaned.name}
+                          modifierArr={
+                            this.state.controls.addressExpaned.modifierArr
+                          }
+                          onChangeHandler={this.onChangeHandler}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                </React.Fragment>
+              )}
 
-                <div className="form__section">
-                  <div className="form__payment-methods">
-                    <h4 className="heading heading_level-4">Оплата</h4>
-                    {paymentMethodsJSX}
-                  </div>
+              <div className="form__section">
+                <div className="form__payment-methods">
+                  <h4 className="heading heading_level-4">Оплата</h4>
+                  {paymentMethodsJSX}
                 </div>
+              </div>
 
-                <div className="form__section">
-                  <div className="form__notification">
-                    <h4 className="heading heading_level-4">Уведомления</h4>
-                    <Checkbox
-                      name={this.state.controls.smsNotification.name}
-                      value={this.state.controls.smsNotification.value}
-                      withLabel={this.state.controls.smsNotification.withLabel}
-                      labelTitle={
-                        this.state.controls.smsNotification.labelTitle
-                      }
-                      checked={this.state.controls.smsNotification.checked}
-                      disabled={this.state.controls.smsNotification.disabled}
-                      modifierArr={
-                        this.state.controls.smsNotification.modifierArr
-                      }
-                      onChangeHandler={this.onChangeHandler}
-                    />
-                  </div>
-                </div>
-
-                <div className="form__button-submit">
-                  <Button
-                    title={"Оформить заказ"}
-                    modifierArr={["submit", "blue", "form"]}
-                    onClickHandler={e => {
-                      e.preventDefault();
-                      let sizeChecked = document.querySelector(
-                        ".product-card__sizes input:checked"
-                      );
-                      if (sizeChecked) {
-                        sizeChecked = sizeChecked.value;
-                      }
-                      this.setState({ sizeChecked });
-                      this.sendForm();
-                    }}
-                    disabled={this.state.isValid ? false : true}
+              <div className="form__section">
+                <div className="form__notification">
+                  <h4 className="heading heading_level-4">Уведомления</h4>
+                  <Checkbox
+                    name={this.state.controls.smsNotification.name}
+                    value={this.state.controls.smsNotification.value}
+                    withLabel={this.state.controls.smsNotification.withLabel}
+                    labelTitle={this.state.controls.smsNotification.labelTitle}
+                    checked={this.state.controls.smsNotification.checked}
+                    disabled={this.state.controls.smsNotification.disabled}
+                    modifierArr={
+                      this.state.controls.smsNotification.modifierArr
+                    }
+                    onChangeHandler={this.onChangeHandler}
                   />
                 </div>
-              </LayoutColumn>
+              </div>
 
-              <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"5"}>
-                <div className="form__product-card">
-                  {this.state.getProductCard}
-                </div>
-              </LayoutColumn>
-            </LayoutRow>
-          </LayoutWrapper>
-        </form>
-      );
-    } else {
-      return null;
-    }
+              <div className="form__button-submit">
+                <Button
+                  title={"Оформить заказ"}
+                  modifierArr={["submit", "blue", "form"]}
+                  onClickHandler={e => {
+                    e.preventDefault();
+                    this.sendForm();
+                  }}
+                  disabled={this.state.isValid ? false : true}
+                />
+              </div>
+            </LayoutColumn>
+
+            <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"5"}>
+              <div className="form__product-card">
+                {this.state.productCardJSX}
+              </div>
+            </LayoutColumn>
+          </LayoutRow>
+        </LayoutWrapper>
+      </form>
+    );
   }
 }
