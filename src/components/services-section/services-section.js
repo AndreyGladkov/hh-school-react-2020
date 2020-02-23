@@ -1,7 +1,7 @@
 import React from "react";
 import Service from "./service";
 
-import {servicesItems} from "../variables";
+import {serviceItems} from "../variables";
 
 export default function(props) {
     return (
@@ -9,7 +9,7 @@ export default function(props) {
             <div className="columns-wrapper">
                 <div className="columns-row">
                     <div className="services-content">
-                        {servicesItems.map((el) => <Service key={el.name} name={el.name} src={el.src}/>)}
+                        {serviceItems.map((el) => <Service key={el.name} name={el.name} src={el.src}/>)}
                     </div>
                 </div>
             </div>
