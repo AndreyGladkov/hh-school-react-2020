@@ -6,7 +6,7 @@ import SliderSection from "./slider-section/slider-section";
 import CatalogSection from "./catalog-section/catalog-section";
 import ServicesSection from "./services-section/services-section";
 import FooterSection from "./footer-section/footer-section";
-import FormSection from "./form-section/form-section";
+import PopupSection from "./popup-section";
 
 export default function(props) {
     return (
@@ -17,7 +17,7 @@ export default function(props) {
             <CatalogSection/>
             <ServicesSection/>
             <FooterSection/>
-            <FormSection/>
+            <PopupSection/>
         </React.Fragment>
     );
 }

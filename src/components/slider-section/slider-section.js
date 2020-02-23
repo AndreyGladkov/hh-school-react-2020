@@ -12,7 +12,8 @@ export default function(props) {
                 <div className="columns-row">
                     <div className="slider-wrapper">
                         {sliderItems.map((el) => 
-                            <Slider key={el.id}
+                            <Slider 
+                                key={el.id}
                                 active={el.active}
                                 text={el.text} 
                                 image1x={el.image1x}
@@ -26,7 +27,8 @@ export default function(props) {
                 <div className="columns-row">
                     <div className="slider-content-block-dots js-slide-buttons">
                         {sliderItems.map((el) => 
-                                <Dot key={el.id}
+                                <Dot 
+                                    key={el.id}
                                     active={el.active}
                                 />
                             )}                 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import ProductCard from "../product-card";
+import ProductCard from "../product-card/product-card";
 
 import {products} from "../variables";
 

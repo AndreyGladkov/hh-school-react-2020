@@ -177,7 +177,7 @@ export const products =
         price: '390',
         oldPrice: '690',
         sale: true,
-        description: 'Красная хлопковая футболка с&#160;коротким рукавом',
+        description: 'Красная хлопковая футболка с\u00A0коротким рукавом',
         sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     },
     {
@@ -200,3 +200,37 @@ export const products =
     },
 ]
 
+export const deliveryTypes = [
+    {
+        name: "Самовывоз",
+        tag: "self-delivery"
+    },
+    {
+        name:"Доставка",
+        tag: "delivery"
+    }
+]
+
+export const cities = ["Москва", "Санкт-Петербург"]
+
+export const paymentTypes = [
+    {
+        name: "Online-оплата",
+        tag: "online"
+    },
+    {
+        name:"Наличными",
+        tag: "cash"
+    },    
+    {
+        name: "Картой при получении",
+        tag: "card"
+    }
+]
+
+export const notificationTypes = [
+    {
+        name: "Хочу получать SMS-уведомления",
+        tag: "sms"
+    }
+]
