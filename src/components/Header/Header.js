@@ -13,14 +13,17 @@ import "./Header.less";
 - вход в личный кабинет
  */
 export default class Header extends Component {
-  state = {
-    linksConfig: [
-      { url: "/", title: "Одежда" },
-      { url: "/", title: "Сумки" },
-      { url: "/", title: "Аксессуары" },
-      { url: "/", title: "Офисные принадлежности" }
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      linksConfig: [
+        { url: "/", title: "Одежда" },
+        { url: "/", title: "Сумки" },
+        { url: "/", title: "Аксессуары" },
+        { url: "/", title: "Офисные принадлежности" }
+      ]
+    };
+  }
 
   render() {
     return (

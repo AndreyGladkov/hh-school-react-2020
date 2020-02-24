@@ -7,7 +7,6 @@ import Slider from "./components/Slider/Slider";
 import Content from "./components/Content/Content";
 import Features from "./components/Features/Features";
 import Footer from "./components/Footer/Footer";
-import OrderForm from "./components/OrderForm/OrderForm";
 const axios = require("axios");
 
 export default class App extends React.Component {
@@ -24,7 +23,7 @@ export default class App extends React.Component {
         .then(response => {
           /* Имитация долгой загрузки с сервера (показать лоадер) */
           return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(response), 0);
+            setTimeout(() => resolve(response), 1500);
           });
         })
         .then(response => {

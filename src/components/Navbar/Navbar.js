@@ -10,16 +10,19 @@ import "./Navbar.less";
 - навигацию по сайту
  */
 export default class Navbar extends Component {
-  state = {
-    area: { city: "Москва", url: "/", modifierArr: ["dark-grey"] },
-    linksConfig: [
-      { url: "/", title: "Шоурум", modifierArr: ["blue"] },
-      { url: "/", title: "Оплата", modifierArr: ["blue"] },
-      { url: "/", title: "Доставка", modifierArr: ["blue"] },
-      { url: "/", title: "Самовывоз", modifierArr: ["blue"] },
-      { url: "/", title: "Контактная информация", modifierArr: ["blue"] }
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      area: { city: "Москва", url: "/", modifierArr: ["dark-grey"] },
+      linksConfig: [
+        { url: "/", title: "Шоурум", modifierArr: ["blue"] },
+        { url: "/", title: "Оплата", modifierArr: ["blue"] },
+        { url: "/", title: "Доставка", modifierArr: ["blue"] },
+        { url: "/", title: "Самовывоз", modifierArr: ["blue"] },
+        { url: "/", title: "Контактная информация", modifierArr: ["blue"] }
+      ]
+    };
+  }
 
   render() {
     return (

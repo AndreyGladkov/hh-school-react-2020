@@ -20,15 +20,18 @@ import "./Footer.less";
 - блок копирайт
 */
 export default class Footer extends Component {
-  state = {
-    statisticsData: {
-      //данные для блока статистики
-      numOfVacancies: "684 978",
-      numOfResumes: "34 789 747",
-      numOfCompanies: "858 923",
-      numOfInvitations: "1 211 363"
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      statisticsData: {
+        //данные для блока статистики
+        numOfVacancies: "684 978",
+        numOfResumes: "34 789 747",
+        numOfCompanies: "858 923",
+        numOfInvitations: "1 211 363"
+      }
+    };
+  }
 
   render() {
     return (
