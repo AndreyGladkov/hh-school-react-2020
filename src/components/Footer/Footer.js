@@ -18,17 +18,17 @@ import "./Footer.less";
 - логотип
 - блок статистики
 - блок копирайт
+
+Принимает:
+- statisticsData  | object |    (статистические данные)
 */
 export default class Footer extends Component {
-  state = {
-    statisticsData: {
-      //данные для блока статистики
-      numOfVacancies: "684 978",
-      numOfResumes: "34 789 747",
-      numOfCompanies: "858 923",
-      numOfInvitations: "1 211 363"
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      statisticsData: this.props.statisticsData
+    };
+  }
 
   render() {
     return (

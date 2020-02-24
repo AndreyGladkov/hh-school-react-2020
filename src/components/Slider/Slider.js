@@ -1,43 +1,34 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { showActiveSlide } from "./../../actions";
 import { LayoutWrapper } from "./../common/Layout/Layout";
 import Pagination from "./Pagination/Pagination";
 import Slide from "./Slide/Slide";
 import "./Slider.less";
 
-/* Компонент-секция Slider*/
-export default class Header extends Component {
-  state = {
-    activeSlideId: 0, //Id активного слайда
-    slidersConfig: [
-      //конфигурация слайдов
-      {
-        src: "images/slide-1@1x.png",
-        title: "Мужская и женская одежда с символикой HeadHunter",
-        callToActionTitle: "Перейти в каталог",
-        srcset:
-          "images/slide-1@1x.png 1x, images/slide-1@2x.png 2x, images/slide-1@3x.png 3x"
-      },
-      {
-        src: "images/slide-2@1x.png",
-        title: "Офисные принадлежности с символикой HeadHunter",
-        callToActionTitle: "Перейти в каталог",
-        srcset:
-          "images/slide-2@1x.png 1x, images/slide-2@2x.png 2x, images/slide-2@3x.png 3x"
-      }
-    ]
-  };
+const mapStateToProps = state => ({
+  activeSlideId: state.activeSlideId
+});
 
-  /* Метод: меняет id активного слайда */
-  showSlide = id => {
-    if (this.state.activeSlideId === id) {
-      return;
-    }
+const mapDispatchToProps = dispatch => ({
+  showSlide: id => dispatch(showActiveSlide(id))
+});
 
-    this.setState({ activeSlideId: id });
-  };
+/* Компонент-контейнер Slider.
+Принимает:
+- slidesConfig    | object |    (конфигурация слайдов)
+- activeSlideID   | number |    (номер активного слайда)
+*/
+class Slider extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slidesConfig: this.props.slidesConfig
+    };
+  }
 
   render() {
-    const sliders = this.state.slidersConfig.map((slideConfig, index) => {
+    const sliders = this.state.slidesConfig.map((slideConfig, index) => {
       return (
         <Slide
           key={index}
@@ -45,7 +36,7 @@ export default class Header extends Component {
           srcset={slideConfig.srcset}
           title={slideConfig.title}
           callToActionTitle={slideConfig.callToActionTitle}
-          activeSlideId={this.state.activeSlideId}
+          activeSlideId={this.props.activeSlideId}
         />
       );
     });
@@ -56,11 +47,13 @@ export default class Header extends Component {
           <div className="slider__wrapper">{sliders}</div>
           <Pagination
             dotsQnt={sliders.length}
-            activeDotIndex={this.state.activeSlideId}
-            onClickHandler={this.showSlide.bind(this)}
+            activeDotIndex={this.props.activeSlideId}
+            onClickHandler={this.props.showSlide}
           />
         </LayoutWrapper>
       </section>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Slider);

@@ -11,16 +11,21 @@ import "./Header.less";
 - навигацию по категориям товаров
 - кнопку поиска по сайту
 - вход в личный кабинет
+Принимает:
+- userLoggedIn  | bool |    (юзер залогинен или нет)
  */
 export default class Header extends Component {
-  state = {
-    linksConfig: [
-      { url: "/", title: "Одежда" },
-      { url: "/", title: "Сумки" },
-      { url: "/", title: "Аксессуары" },
-      { url: "/", title: "Офисные принадлежности" }
-    ]
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      linksConfig: [
+        { url: "/", title: "Одежда" },
+        { url: "/", title: "Сумки" },
+        { url: "/", title: "Аксессуары" },
+        { url: "/", title: "Офисные принадлежности" }
+      ]
+    };
+  }
 
   render() {
     return (
@@ -39,7 +44,10 @@ export default class Header extends Component {
               <Button type="icon" modifierArr={["login"]} />
             </div>
             <div className="header__button-login">
-              <Button title={"Войти"} modifierArr={["login"]} />
+              <Button
+                title={this.props.userLoggedIn ? "Войти" : "Выйти"}
+                modifierArr={["login"]}
+              />
             </div>
             <div className="header__button-menu">
               <Button type="icon" modifierArr={["menu"]} />
