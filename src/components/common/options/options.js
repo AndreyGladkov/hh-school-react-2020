@@ -35,6 +35,7 @@ export default class Options extends Component {
 
     return (
       <Fragment>
+        <option value="Город" className="className">Город</option>
         {optionsJSX}
       </Fragment>
     );

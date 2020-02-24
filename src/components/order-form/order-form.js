@@ -11,7 +11,7 @@ export default class OrderForm extends Component {
       formErrors: {name: null, email: null, codeCountry: null, mobileNumber: null, address: null},
       checkedDelivery: "",
       formValid: false,
-      formData: {delivery: "delivery", city: "Андреевка"}
+      formData: {delivery: "delivery", city: "Город"}
     };
     this.productData = props.productData || null;
     this.productCardJSX = props.productCardJSX || null;
