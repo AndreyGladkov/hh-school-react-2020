@@ -1,0 +1,31 @@
+.navbar {
+  display: none;
+
+  @media @screen-gt-s {
+    display: block;
+  }
+
+  &__content {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__nav-list {
+    font-size: 14px;
+  }
+
+  &__nav-item {
+    margin-left: 20px;
+  }
+
+  &__nav-link {
+    color: #609fcf;
+
+    &:hover {
+      color: #c00;
+      text-decoration: none;
+    }
+  }
+}

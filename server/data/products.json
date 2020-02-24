@@ -1,0 +1,75 @@
+[
+  {
+    "id": "1",
+    "name": "Зонт",
+    "image": "product-1.jpg",
+    "description": "Красный зонт",
+    "price": "1 990",
+    "currency": "₽"
+  },
+  {
+    "id": "2",
+    "name": "Сумка",
+    "image": "product-2.jpg",
+    "description": "Красная сумка",
+    "price": "290",
+    "currency": "₽"
+  },
+  {
+    "id": "3",
+    "name": "Шлепанцы",
+    "image": "product-3.jpg",
+    "description": "Красные шлепанцы",
+    "price": "790",
+    "currency": "₽",
+    "sizes": {
+      "38": true,
+      "39": true,
+      "40": true,
+      "41": true,
+      "42": true,
+      "43": true
+    }
+  },
+  {
+    "id": "4",
+    "name": "Футболка",
+    "image": "product-4.jpg",
+    "description": "Красная футболка",
+    "price": "690",
+    "salePrice": "390",
+    "currency": "₽",
+    "sizes": {
+      "XS": true,
+      "X": true,
+      "M": true,
+      "L": true,
+      "XL": true,
+      "XXL": true
+    }
+  },
+  {
+    "id": "5",
+    "name": "Толстовка",
+    "image": "product-5.jpg",
+    "description": "Красная толстовка",
+    "price": "3 990",
+    "currency": "₽",
+    "sizes": {
+      "XS": true,
+      "X": true,
+      "M": false,
+      "L": false,
+      "XL": true,
+      "XXL": true
+    }
+  },
+  {
+    "id": "6",
+    "name": "Подушка",
+    "image": "product-6.jpg",
+    "description": "Красная подушка",
+    "price": "990",
+    "currency": "₽"
+  }
+]
