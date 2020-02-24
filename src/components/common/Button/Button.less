@@ -1,0 +1,102 @@
+@import "./../variables";
+@imagesPath: "./../../../images";
+
+.button {
+  box-sizing: border-box;
+  height: @control-height;
+  display: inline-block;
+  padding: 0 15px;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  background: none;
+  font: 14px/ (@control-height - 2px) Arial, sans-serif;
+  text-align: center;
+  color: @color-light;
+  user-select: none;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-property: background-color, border-color, color;
+
+  &_blue {
+    background-color: @color-primary;
+  }
+
+  &_login {
+    border-color: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 0 18px;
+  }
+
+  &_disabled {
+    cursor: none;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: rgba(255, 255, 255, 1);
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.button_submit {
+  width: 100%;
+}
+
+.button_form {
+  @media @screen-gt-s {
+    width: auto;
+  }
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px;
+  background: no-repeat 50% 50%;
+  border: 0;
+  border-radius: 0;
+  text-indent: -9999px;
+  outline: none;
+  cursor: pointer;
+
+  &_close {
+    width: 40px;
+    height: 40px;
+    background-image: url("@{imagesPath}/close.svg");
+  }
+
+  &_search {
+    background-image: url("@{imagesPath}/search-icon.svg");
+  }
+
+  &_login {
+    background-image: url("@{imagesPath}/login-icon.svg");
+    @media @screen-gt-s {
+      display: none;
+    }
+  }
+
+  &_menu {
+    background-image: url("@{imagesPath}/menu-icon.svg");
+  }
+}
+
+/* extend (.class) не позволяет расширить динамечски созданный класс */
+.button-icon_app-store {
+  width: 140px;
+  height: 40px;
+  padding: 0;
+  background-image: url("@{imagesPath}/app-store-icon.svg");
+}
+
+.button-icon_google-play {
+  &:extend(.button-icon_app-store);
+  background-image: url("@{imagesPath}/google-play-icon.svg");
+}

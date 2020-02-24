@@ -1,0 +1,29 @@
+@import "./../../common/variables";
+
+.feature {
+  &__image {
+    width: 35px;
+    height: 35px;
+    padding-right: 20px;
+
+    @media @screen-gt-s {
+      padding-right: 10px;
+    }
+
+    @media @screen-gt-m {
+      padding-right: 30px;
+    }
+  }
+  &__description {
+    font-family: @font-family-global;
+    font-size: @font-size-global;
+    line-height: 20px;
+
+    color: @color-dark-1;
+    padding-right: 30px;
+
+    @media @screen-gt-s {
+      padding-right: 5px;
+    }
+  }
+}

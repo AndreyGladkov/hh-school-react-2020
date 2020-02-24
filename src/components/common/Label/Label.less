@@ -1,0 +1,15 @@
+@import "./../variables";
+
+.label {
+  display: inline-block;
+  font-family: @font-family-global;
+  font-size: @font-size-global;
+  line-height: (@control-height);
+  color: @color-dark-1;
+  cursor: pointer;
+  transition: 0.2s all linear;
+
+  &_disabled {
+    opacity: 0.7;
+  }
+}

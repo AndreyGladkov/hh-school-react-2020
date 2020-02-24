@@ -1,0 +1,35 @@
+@import "./../variables";
+
+.checkbox {
+  display: inline-block;
+  position: relative;
+  padding: 5px 0;
+
+  &__box {
+    position: absolute;
+    clip: rect(0 0 0 0);
+  }
+
+  .label {
+    cursor: pointer;
+    line-height: 16px;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      float: left;
+      margin-right: 5px;
+      background-color: @color-light;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #c5c9ca;
+      border-radius: 2px;
+      line-height: 16px;
+      text-align: center;
+    }
+  }
+}
+
+.checkbox__box:checked + .label:before {
+  content: "\2713";
+}
