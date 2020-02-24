@@ -1,0 +1,49 @@
+@import './variables.less';
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font: 14px/1.43 Arial, sans-serif;
+    color: #333;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #609fcf;
+  
+    &:hover {
+      text-decoration: underline;
+  }
+  
+  &:active, &:focus {
+      outline: none;
+      color: #c00;
+  }
+  
+  }
+  
+  .popup-wrapper {
+    width: 100wv;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background-color: rgba(0,0,0, .3);
+  }
+  
+  .be-first {
+    @media @screen-gt-s {order: -1;}
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  fieldset {
+    border: none;
+  }
+  

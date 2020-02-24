@@ -1,0 +1,87 @@
+@import './../../less/variables.less';
+@import './../../less/button/button.less';
+
+.header {
+    background-color: @color-dark;
+    color: #fff;
+
+    &__content {
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        @media @screen-gt-m {
+            height: 80px;
+        }
+
+    }
+
+    &__fill {
+        flex-grow: 1;
+    }
+
+    &__button {
+        margin-left: 20px;
+    }
+
+    &__button-menu {                
+        @media @screen-gt-s{
+            display: none;
+        }
+    }
+
+}
+
+.header-button-icon {
+    
+    height: 30px;
+    width: 30px;
+    border: 0;
+    cursor: pointer;
+    background: no-repeat 50% 50%;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    
+    &_search {
+        background-image: url('search-icon.svg');
+    }
+
+    &_login {
+        background-image: url('login-icon.svg');
+
+        @media @screen-gt-s {
+            display: none;
+        }
+    }
+
+    &_menu {
+        background-image: url('menu-icon.svg'); 
+    }
+
+}
+
+.header-button {
+    .default-button();
+
+    background: none;
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.6);
+    padding: 0 18px;
+
+    &:hover,
+    &:focus {
+        border-color: #fff;
+        outline: none;
+    }
+
+    &_login {
+        display: none;
+
+        @media @screen-gt-s {
+            display: inline-block;
+        }
+    }
+
+}
