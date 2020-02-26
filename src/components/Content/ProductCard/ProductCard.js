@@ -17,13 +17,10 @@ export default class ProductCard extends Component {
     this.onCardClickHandler = this.onCardClickHandler.bind(this);
     this.closeOpenedCard = this.closeOpenedCard.bind(this);
     this.setBodyOverflow = this.setBodyOverflow.bind(this);
-
+    this.mobileSize = 768;
     this.state = {
-      productData: props.productData,
       isCardOpened: false,
-      isMobile: false,
-      mobileSize: 768,
-      orderForm: null
+      isMobile: false
     };
   }
 
@@ -31,7 +28,7 @@ export default class ProductCard extends Component {
 
   /* Метод: изменения состояния в зависимости от размера экрана */
   handleWindowResize() {
-    if (window.innerWidth >= this.state.mobileSize) {
+    if (window.innerWidth >= this.mobileSize) {
       this.setState({ isMobile: false });
     } else {
       this.setState({ isMobile: true });
@@ -107,14 +104,14 @@ export default class ProductCard extends Component {
   }
 
   render() {
-    if (!this.state.productData) return null;
+    if (!this.props.productData) return null;
 
-    const productCardJSX = this.getProductCard(this.state.productData);
+    const productCardJSX = this.getProductCard(this.props.productData);
 
     const productCardPopupJSX = (
       <ProductCardPopup
         productCardBlock={productCardJSX}
-        productData={this.state.productData}
+        productData={this.props.productData}
         closeOpenedCard={this.closeOpenedCard}
       />
     );

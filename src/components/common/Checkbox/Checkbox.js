@@ -17,31 +17,21 @@ export default class Checkbox extends Component {
   constructor(props) {
     super(props);
     this.onChangeHandlerSelf = this.onChangeHandlerSelf.bind(this);
-    this.state = {
-      id: Math.random(),
-      name: props.name || "",
-      value: props.value || "",
-      withLabel: props.withLabel || false,
-      labelTitle: props.labelTitle || "",
-      checked: props.checked || false,
-      modifierArr: props.modifierArr || [],
-      onChangeHandler: props.onChangeHandler || null
-    };
   }
 
   /* Метод: обработчик изменения radio. Может вызывать внешний обработчик */
   onChangeHandlerSelf(e) {
-    this.setState({ checked: !this.state.checked });
+    this.setState({ checked: !this.props.checked });
 
     /* Использование внешнего обработчика */
-    if (this.state.onChangeHandler) {
-      this.state.onChangeHandler(e);
+    if (this.props.onChangeHandler) {
+      this.props.onChangeHandler(e);
     }
   }
 
   render() {
     let className = "checkbox__box";
-    let modifierArr = [...this.state.modifierArr];
+    let modifierArr = [...this.props.modifierArr];
 
     if (modifierArr.length) {
       modifierArr.forEach(
@@ -55,17 +45,17 @@ export default class Checkbox extends Component {
         <input
           className={className}
           type={"checkbox"}
-          id={this.state.id}
-          name={this.state.name}
-          value={this.state.value}
+          id={this.props.labelTitle}
+          name={this.props.name}
+          value={this.props.value}
           disabled={this.props.disabled}
-          defaultChecked={this.state.checked}
+          defaultChecked={this.props.checked}
           onChange={this.onChangeHandlerSelf}
         ></input>
-        {this.state.withLabel ? (
+        {this.props.withLabel ? (
           <Label
-            htmlFor={this.state.id}
-            title={this.state.labelTitle}
+            htmlFor={this.props.labelTitle}
+            title={this.props.labelTitle}
             disabled={this.props.disabled}
           />
         ) : null}

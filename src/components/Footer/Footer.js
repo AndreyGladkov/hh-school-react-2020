@@ -20,18 +20,13 @@ import "./Footer.less";
 - блок копирайт
 */
 export default class Footer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      statisticsData: {
-        //данные для блока статистики
-        numOfVacancies: "684 978",
-        numOfResumes: "34 789 747",
-        numOfCompanies: "858 923",
-        numOfInvitations: "1 211 363"
-      }
-    };
-  }
+  statisticsData = {
+    //данные для блока статистики
+    numOfVacancies: "684 978",
+    numOfResumes: "34 789 747",
+    numOfCompanies: "858 923",
+    numOfInvitations: "1 211 363"
+  };
 
   render() {
     return (
@@ -63,7 +58,7 @@ export default class Footer extends Component {
           <LayoutRow>
             <LayoutColumn sColumnQnt={"2"} mColumnQnt={"5"} lColumnQnt={"7"}>
               <Copyright />
-              <Statistics statisticsData={this.state.statisticsData} />
+              <Statistics statisticsData={this.statisticsData} />
             </LayoutColumn>
           </LayoutRow>
         </LayoutWrapper>

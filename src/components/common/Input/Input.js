@@ -23,15 +23,7 @@ export default class Input extends Component {
     super(props);
     this.onChangeHandlerSelf = this.onChangeHandlerSelf.bind(this);
     this.state = {
-      id: Math.random(),
-      name: props.name || "",
       value: props.value || "",
-      withLabel: props.withLabel || false,
-      labelTitle: props.labelTitle || "",
-      placeholder: props.placeholder || "",
-      readOnly: props.readOnly || false,
-      modifierArr: props.modifierArr || [],
-      autocomplete: props.autocomplete || "off",
       onChangeHandler: props.onChangeHandler || null,
       touched: false
     };
@@ -42,8 +34,8 @@ export default class Input extends Component {
     this.setState({ value: e.target.value, touched: true });
 
     /* Использование внешнего обработчика */
-    if (this.state.onChangeHandler) {
-      this.state.onChangeHandler(e);
+    if (this.props.onChangeHandler) {
+      this.props.onChangeHandler(e);
     }
   }
 
@@ -59,7 +51,7 @@ export default class Input extends Component {
 
   render() {
     let className = "input";
-    let modifierArr = [...this.state.modifierArr];
+    let modifierArr = [...this.props.modifierArr];
 
     const inputIsInvalid = this.props.shouldValidate ? this.isInvalid() : false;
     if (inputIsInvalid) {
@@ -77,22 +69,22 @@ export default class Input extends Component {
       <div className="input-block">
         <input
           className={className}
-          id={this.state.id}
-          name={this.state.name}
+          id={this.props.labelTitle + this.props.name}
+          name={this.props.name}
           value={this.state.value}
-          placeholder={this.state.placeholder}
-          readOnly={this.state.readOnly}
-          autoComplete={this.state.autocomplete}
+          placeholder={this.props.placeholder}
+          readOnly={this.props.readOnly}
+          autoComplete={this.props.autocomplete}
           onChange={this.onChangeHandlerSelf}
           disabled={this.props.disabled}
         ></input>
         {inputIsInvalid ? (
           <span className="input__error">{this.props.errorMessage}</span>
         ) : null}
-        {this.state.withLabel ? (
+        {this.props.withLabel ? (
           <Label
-            htmlFor={this.state.id}
-            title={this.state.labelTitle}
+            htmlFor={this.props.labelTitle + this.props.name}
+            title={this.props.labelTitle}
             disabled={this.props.disabled}
           />
         ) : null}

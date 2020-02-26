@@ -16,9 +16,6 @@ export default class ProductCardPopup extends Component {
     super(props);
     this.onOutsideClick = this.handleClickOutside.bind(this);
     this.state = {
-      productCardBlock: props.productCardBlock,
-      productData: props.productData,
-      closeOpenedCard: props.closeOpenedCard,
       showForm: false,
       sizeChecked: ""
     };
@@ -28,7 +25,7 @@ export default class ProductCardPopup extends Component {
   handleClickOutside(e) {
     e.stopImmediatePropagation();
     if (e.target.closest(".popup") || e.target.closest(".form")) return;
-    this.state.closeOpenedCard();
+    this.props.closeOpenedCard();
   }
 
   componentDidMount() {
@@ -67,7 +64,7 @@ export default class ProductCardPopup extends Component {
   }
 
   render() {
-    const productData = this.state.productData;
+    const productData = this.props.productData;
 
     const submitButtonModifierArr = ["submit", "blue"];
     /* Класс disabled для кнопки заказать (если у товара есть размер) */
@@ -77,12 +74,12 @@ export default class ProductCardPopup extends Component {
     /* JSX расширенной карточки продукта (описание, размеры) */
     const productCardBlockExtJSX = (
       <React.Fragment>
-        {this.state.productCardBlock}
+        {this.props.productCardBlock}
         <h4 className="product-card__description">
-          {this.state.productData.description}
+          {this.props.productData.description}
         </h4>
         {this.getProductCardSizes(
-          this.state.productData.sizes,
+          this.props.productData.sizes,
           this.state.sizeChecked
         )}
       </React.Fragment>
@@ -107,7 +104,7 @@ export default class ProductCardPopup extends Component {
               type="icon"
               modifierArr={["close"]}
               onClickHandler={() => {
-                this.state.closeOpenedCard();
+                this.props.closeOpenedCard();
               }}
             />
           </div>

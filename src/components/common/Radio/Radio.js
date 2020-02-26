@@ -18,14 +18,7 @@ export default class Radio extends Component {
     super(props);
     this.onChangeHandlerSelf = this.onChangeHandlerSelf.bind(this);
     this.state = {
-      id: Math.random(),
-      name: props.name || "",
-      value: props.value || "",
-      withLabel: props.withLabel || false,
-      labelTitle: props.labelTitle || "",
-      checked: props.checked || false,
-      modifierArr: props.modifierArr || [],
-      onChangeHandler: props.onChangeHandler || null
+      checked: props.checked || false
     };
   }
 
@@ -34,14 +27,14 @@ export default class Radio extends Component {
     this.setState({ checked: !this.state.checked });
 
     /* Использование внешнего обработчика */
-    if (this.state.onChangeHandler) {
-      this.state.onChangeHandler(e);
+    if (this.props.onChangeHandler) {
+      this.props.onChangeHandler(e);
     }
   }
 
   render() {
     let className = "radio";
-    let modifierArr = [...this.state.modifierArr];
+    let modifierArr = [...this.props.modifierArr];
 
     if (modifierArr.length) {
       modifierArr.forEach(
@@ -50,22 +43,23 @@ export default class Radio extends Component {
       className += " " + modifierArr.join(" ");
     }
 
+    const id = this.props.labelTitle + this.props.name + Math.random();
     return (
       <React.Fragment>
         <input
           className={className}
           type={"radio"}
-          id={this.state.id}
-          name={this.state.name}
-          value={this.state.value}
+          id={id}
+          name={this.props.name}
+          value={this.props.value}
           disabled={this.props.disabled}
           defaultChecked={this.state.checked}
           onChange={this.onChangeHandlerSelf}
         ></input>
-        {this.state.withLabel ? (
+        {this.props.withLabel ? (
           <Label
-            htmlFor={this.state.id}
-            title={this.state.labelTitle}
+            htmlFor={id}
+            title={this.props.labelTitle}
             disabled={this.props.disabled}
           />
         ) : null}

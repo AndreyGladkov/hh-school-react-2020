@@ -13,17 +13,12 @@ import "./Header.less";
 - вход в личный кабинет
  */
 export default class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      linksConfig: [
-        { url: "/", title: "Одежда" },
-        { url: "/", title: "Сумки" },
-        { url: "/", title: "Аксессуары" },
-        { url: "/", title: "Офисные принадлежности" }
-      ]
-    };
-  }
+  linksConfig = [
+    { url: "/", title: "Одежда" },
+    { url: "/", title: "Сумки" },
+    { url: "/", title: "Аксессуары" },
+    { url: "/", title: "Офисные принадлежности" }
+  ];
 
   render() {
     return (
@@ -33,7 +28,7 @@ export default class Header extends Component {
             <div className="header__logo">
               <Logo url={"/"} src={"../../images/logo.svg"} alt={"hh.ru"} />
             </div>
-            <Navigation linksConfig={this.state.linksConfig} />
+            <Navigation linksConfig={this.linksConfig} />
             <div className="header__fill"></div>
             <div className="header__button">
               <Button type="icon" modifierArr={["search"]} />

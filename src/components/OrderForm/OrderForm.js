@@ -23,12 +23,10 @@ export default class OrderForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.controls = controlsConfig;
     this.state = {
-      controls: controlsConfig,
       isValid: false,
-      productCardJSX: props.productCardJSX || null,
-      sizeChecked: props.sizeChecked || "",
-      closeOpenedCard: props.closeOpenedCard
+      sizeChecked: props.sizeChecked || ""
     };
   }
 
@@ -52,7 +50,7 @@ export default class OrderForm extends Component {
   /* Метод: универсальный хэндлер для контроллов */
   onChangeHandler(e) {
     const control = e.target;
-    const controls = { ...this.state.controls };
+    const controls = { ...this.controls };
     controls[control.name].value = control.value;
 
     /* обработка контроллов, требующих валидации */
@@ -84,7 +82,7 @@ export default class OrderForm extends Component {
 
   /* Метод: проверка на валидность форму перед отправкой */
   isValid() {
-    const controls = { ...this.state.controls };
+    const controls = { ...this.controls };
     for (let control in controls) {
       if (controls[control].required && !controls[control].valid) {
         return false;
@@ -95,7 +93,7 @@ export default class OrderForm extends Component {
 
   /* Метод: отправка формы (console.log полей) */
   sendForm() {
-    console.log(this.state.controls, `sizeChecked: ${this.state.sizeChecked}`);
+    console.log(this.controls, `sizeChecked: ${this.state.sizeChecked}`);
     this.props.closeOpenedCard();
   }
 
@@ -106,19 +104,19 @@ export default class OrderForm extends Component {
       return (
         <div className="form__input-block" key={index}>
           <Input
-            name={this.state.controls[controlName].name}
-            value={this.state.controls[controlName].value}
-            withLabel={this.state.controls[controlName].withLabel}
-            labelTitle={this.state.controls[controlName].labelTitle}
-            placeholder={this.state.controls[controlName].placeholder}
-            readOnly={this.state.controls[controlName].readOnly}
-            autocomplete={this.state.controls[controlName].autocomplete}
-            modifierArr={this.state.controls[controlName].modifierArr}
-            disabled={this.state.controls[controlName].disabled}
+            name={this.controls[controlName].name}
+            value={this.controls[controlName].value}
+            withLabel={this.controls[controlName].withLabel}
+            labelTitle={this.controls[controlName].labelTitle}
+            placeholder={this.controls[controlName].placeholder}
+            readOnly={this.controls[controlName].readOnly}
+            autocomplete={this.controls[controlName].autocomplete}
+            modifierArr={this.controls[controlName].modifierArr}
+            disabled={this.controls[controlName].disabled}
             onChangeHandler={this.onChangeHandler}
-            valid={this.state.controls[controlName].valid}
-            shouldValidate={this.state.controls[controlName].shouldValidate}
-            errorMessage={this.state.controls[controlName].errorMessage}
+            valid={this.controls[controlName].valid}
+            shouldValidate={this.controls[controlName].shouldValidate}
+            errorMessage={this.controls[controlName].errorMessage}
           />
         </div>
       );
@@ -130,19 +128,19 @@ export default class OrderForm extends Component {
       return (
         <Input
           key={index}
-          name={this.state.controls[controlName].name}
-          value={this.state.controls[controlName].value}
-          withLabel={this.state.controls[controlName].withLabel}
-          labelTitle={this.state.controls[controlName].labelTitle}
-          placeholder={this.state.controls[controlName].placeholder}
-          readOnly={this.state.controls[controlName].readOnly}
-          autocomplete={this.state.controls[controlName].autocomplete}
-          modifierArr={this.state.controls[controlName].modifierArr}
-          disabled={this.state.controls[controlName].disabled}
+          name={this.controls[controlName].name}
+          value={this.controls[controlName].value}
+          withLabel={this.controls[controlName].withLabel}
+          labelTitle={this.controls[controlName].labelTitle}
+          placeholder={this.controls[controlName].placeholder}
+          readOnly={this.controls[controlName].readOnly}
+          autocomplete={this.controls[controlName].autocomplete}
+          modifierArr={this.controls[controlName].modifierArr}
+          disabled={this.controls[controlName].disabled}
           onChangeHandler={this.onChangeHandler}
-          valid={this.state.controls[controlName].valid}
-          shouldValidate={this.state.controls[controlName].shouldValidate}
-          errorMessage={this.state.controls[controlName].errorMessage}
+          valid={this.controls[controlName].valid}
+          shouldValidate={this.controls[controlName].shouldValidate}
+          errorMessage={this.controls[controlName].errorMessage}
         />
       );
     });
@@ -154,19 +152,13 @@ export default class OrderForm extends Component {
       return (
         <div className="form__radio-button" key={index}>
           <Radio
-            name={this.state.controls[deliveryGroup][controlName].name}
-            value={this.state.controls[deliveryGroup][controlName].value}
-            withLabel={
-              this.state.controls[deliveryGroup][controlName].withLabel
-            }
-            labelTitle={
-              this.state.controls[deliveryGroup][controlName].labelTitle
-            }
-            checked={this.state.controls[deliveryGroup][controlName].checked}
-            disabled={this.state.controls[deliveryGroup][controlName].disabled}
-            modifierArr={
-              this.state.controls[deliveryGroup][controlName].modifierArr
-            }
+            name={this.controls[deliveryGroup][controlName].name}
+            value={this.controls[deliveryGroup][controlName].value}
+            withLabel={this.controls[deliveryGroup][controlName].withLabel}
+            labelTitle={this.controls[deliveryGroup][controlName].labelTitle}
+            checked={this.controls[deliveryGroup][controlName].checked}
+            disabled={this.controls[deliveryGroup][controlName].disabled}
+            modifierArr={this.controls[deliveryGroup][controlName].modifierArr}
             onChangeHandler={this.onChangeHandler}
           />
         </div>
@@ -180,17 +172,13 @@ export default class OrderForm extends Component {
       return (
         <div className="form__payment-method" key={index}>
           <Radio
-            name={this.state.controls[paymentGroup][controlName].name}
-            value={this.state.controls[paymentGroup][controlName].value}
-            withLabel={this.state.controls[paymentGroup][controlName].withLabel}
-            labelTitle={
-              this.state.controls[paymentGroup][controlName].labelTitle
-            }
-            checked={this.state.controls[paymentGroup][controlName].checked}
-            disabled={this.state.controls[paymentGroup][controlName].disabled}
-            modifierArr={
-              this.state.controls[paymentGroup][controlName].modifierArr
-            }
+            name={this.controls[paymentGroup][controlName].name}
+            value={this.controls[paymentGroup][controlName].value}
+            withLabel={this.controls[paymentGroup][controlName].withLabel}
+            labelTitle={this.controls[paymentGroup][controlName].labelTitle}
+            checked={this.controls[paymentGroup][controlName].checked}
+            disabled={this.controls[paymentGroup][controlName].disabled}
+            modifierArr={this.controls[paymentGroup][controlName].modifierArr}
             onChangeHandler={this.onChangeHandler}
           />
         </div>
@@ -232,32 +220,24 @@ export default class OrderForm extends Component {
                 </div>
               </div>
 
-              {this.state.controls.deliveryMethod.checkedValue ===
+              {this.controls.deliveryMethod.checkedValue ===
                 "deliveryPickup" && (
                 <React.Fragment>
                   <div className="form__section">
                     <div className="form__delivery-address">
                       <h4 className="heading heading_level-4">Адрес</h4>
                       <Select
-                        value={this.state.controls.cityLocataion.value}
-                        name={this.state.controls.cityLocataion.name}
-                        modifierArr={
-                          this.state.controls.cityLocataion.modifierArr
-                        }
+                        value={this.controls.cityLocataion.value}
+                        name={this.controls.cityLocataion.name}
+                        modifierArr={this.controls.cityLocataion.modifierArr}
                         onClickHandler={this.onChangeHandler}
-                        apiAddress={
-                          this.state.controls.cityLocataion.apiAddress
-                        }
+                        apiAddress={this.controls.cityLocataion.apiAddress}
                       />
                       <div className="form__textarea">
                         <Textarea
-                          placeholder={
-                            this.state.controls.addressExpaned.placeholder
-                          }
-                          name={this.state.controls.addressExpaned.name}
-                          modifierArr={
-                            this.state.controls.addressExpaned.modifierArr
-                          }
+                          placeholder={this.controls.addressExpaned.placeholder}
+                          name={this.controls.addressExpaned.name}
+                          modifierArr={this.controls.addressExpaned.modifierArr}
                           onChangeHandler={this.onChangeHandler}
                         />
                       </div>
@@ -277,15 +257,13 @@ export default class OrderForm extends Component {
                 <div className="form__notification">
                   <h4 className="heading heading_level-4">Уведомления</h4>
                   <Checkbox
-                    name={this.state.controls.smsNotification.name}
-                    value={this.state.controls.smsNotification.value}
-                    withLabel={this.state.controls.smsNotification.withLabel}
-                    labelTitle={this.state.controls.smsNotification.labelTitle}
-                    checked={this.state.controls.smsNotification.checked}
-                    disabled={this.state.controls.smsNotification.disabled}
-                    modifierArr={
-                      this.state.controls.smsNotification.modifierArr
-                    }
+                    name={this.controls.smsNotification.name}
+                    value={this.controls.smsNotification.value}
+                    withLabel={this.controls.smsNotification.withLabel}
+                    labelTitle={this.controls.smsNotification.labelTitle}
+                    checked={this.controls.smsNotification.checked}
+                    disabled={this.controls.smsNotification.disabled}
+                    modifierArr={this.controls.smsNotification.modifierArr}
                     onChangeHandler={this.onChangeHandler}
                   />
                 </div>
@@ -306,7 +284,7 @@ export default class OrderForm extends Component {
 
             <LayoutColumn sColumnQnt={"2"} mColumnQnt={"3"} lColumnQnt={"5"}>
               <div className="form__product-card">
-                {this.state.productCardJSX}
+                {this.props.productCardJSX}
               </div>
             </LayoutColumn>
           </LayoutRow>

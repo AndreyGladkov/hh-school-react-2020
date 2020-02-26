@@ -13,11 +13,7 @@ export default class Textarea extends Component {
     super(props);
     this.onChangeHandlerSelf = this.onChangeHandlerSelf.bind(this);
     this.state = {
-      value: props.value || "",
-      name: props.name || "",
-      placeholder: props.placeholder || "",
-      modifierArr: props.modifierArr || [],
-      onChangeHandler: props.onChangeHandler || null
+      value: props.value || ""
     };
   }
 
@@ -25,14 +21,14 @@ export default class Textarea extends Component {
   onChangeHandlerSelf(e) {
     this.setState({ value: e.target.value });
     /* Использование внешнего обработчика */
-    if (this.state.onChangeHandler) {
-      this.state.onChangeHandler(e);
+    if (this.props.onChangeHandler) {
+      this.props.onChangeHandler(e);
     }
   }
 
   render() {
     let className = "textarea";
-    let modifierArr = [...this.state.modifierArr];
+    let modifierArr = [...this.props.modifierArr];
 
     if (modifierArr.length) {
       modifierArr.forEach(
@@ -45,8 +41,8 @@ export default class Textarea extends Component {
       <textarea
         type="textarea"
         className={className}
-        placeholder={this.state.placeholder}
-        name={this.state.name}
+        placeholder={this.props.placeholder}
+        name={this.props.name}
         onChange={this.onChangeHandlerSelf}
         value={this.state.value}
       ></textarea>

@@ -8,17 +8,10 @@ import "./Content.less";
 - productDataArr      | array of object |    (массив объектов с данными товаров)
 */
 export default class Content extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productDataArr: props.productDataArr
-    };
-  }
-
   render() {
-    const products = Object.values(this.state.productDataArr).map(
-      (productData, index) => {
-        return <ProductCard productData={productData} key={index} />;
+    const products = Object.values(this.props.productDataArr).map(
+      productData => {
+        return <ProductCard productData={productData} key={productData.id} />;
       }
     );
 

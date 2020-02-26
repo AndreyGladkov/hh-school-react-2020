@@ -17,17 +17,13 @@ export default class Select extends Component {
     this.state = {
       isOpened: false,
       dataFromServer: null,
-      apiAddress: props.apiAddress || "",
-      value: props.value || "",
-      name: props.name || "",
-      modifierArr: props.modifierArr || [],
-      onClickHandler: props.onClickHandler || null
+      value: props.value || ""
     };
   }
 
   componentDidMount() {
     axios
-      .get(this.state.apiAddress)
+      .get(this.props.apiAddress)
       .then(response => {
         /* Данные получены. Для примера берем Московскую область, 7 городов*/
         const data = response.data.areas[21].areas.slice(0, 7);
@@ -44,17 +40,17 @@ export default class Select extends Component {
     const value = e.target.innerHTML;
     this.setState({ value, isOpened: !this.state.isOpened });
     /* Использование внешнего обработчика */
-    if (this.state.onClickHandler) {
+    if (this.props.onClickHandler) {
       const syntheticEvent = {
-        target: { name: this.state.name, value }
+        target: { name: this.props.name, value }
       };
-      this.state.onClickHandler(syntheticEvent);
+      this.props.onClickHandler(syntheticEvent);
     }
   }
 
   render() {
     let className = "select-block";
-    let modifierArr = [...this.state.modifierArr];
+    let modifierArr = [...this.props.modifierArr];
 
     if (this.state.isOpened) modifierArr.push("active");
 
