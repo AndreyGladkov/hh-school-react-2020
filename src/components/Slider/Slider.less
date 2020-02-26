@@ -1,0 +1,50 @@
+@import "./../common/variables";
+
+.slider {
+  &__wrapper {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  &__pagination {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 59%;
+    left: 50%;
+
+    @media (min-width: 360px) {
+      top: 61%;
+    }
+
+    @media (min-width: 400px) {
+      top: 63%;
+    }
+
+    @media (min-width: 450px) {
+      top: 65%;
+    }
+
+    @media (min-width: 500px) {
+      top: 66%;
+    }
+
+    @media (min-width: 530px) {
+      top: 69%;
+    }
+
+    @media (min-width: 580px) {
+      top: 70%;
+    }
+
+    @media (min-width: 594px) {
+      top: 75%;
+    }
+
+    @media @screen-gt-s {
+      position: relative;
+      padding: 20px 0 10px 0;
+    }
+  }
+}

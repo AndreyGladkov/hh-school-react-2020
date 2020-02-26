@@ -1,0 +1,87 @@
+@import "./../common/variables";
+
+.form {
+  background-color: @color-light;
+  position: relative;
+
+  @media @screen-gt-s {
+    margin: 5px auto;
+    max-width: 768px;
+  }
+
+  @media @screen-gt-m {
+    max-width: 1010px;
+  }
+
+  &__heading {
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  &__input-block {
+    position: relative;
+    margin: 10px 0;
+  }
+
+  &__input-tel {
+    display: flex;
+    margin-top: 5px;
+    position: relative;
+  }
+
+  &__delivery-method {
+    display: flex;
+  }
+
+  &__delivery-address {
+    &_hide {
+      display: none;
+    }
+  }
+
+  &__textarea {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  &__button-submit {
+    margin: 20px 0 20px 0;
+  }
+
+  &__button-close {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    z-index: 1000;
+  }
+
+  &__product-card {
+    display: none;
+
+    @media @screen-gt-s {
+      display: flex;
+      flex-direction: column;
+      width: 290px;
+      margin-top: 136px;
+      float: right;
+    }
+  }
+
+  &_hide {
+    display: none;
+    @media @screen-gt-s {
+      display: block;
+    }
+  }
+}
+
+.form {
+  position: fixed;
+  overflow: auto;
+  transition: all 300ms linear;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+}
