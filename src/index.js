@@ -1,6 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore, applyMiddleware } from 'redux';
+import { reducer } from './reducer';
+import { Provider } from 'react-redux';
+import middleware from './components/catalog-section/catalog-middleware';
 
 import MainComponent from "./components/main-component";
 
-ReactDOM.render(<MainComponent />, document.getElementById("root"));
+const store = createStore(reducer, {product: []}, applyMiddleware(middleware));
+
+ReactDOM.render(
+    <Provider store={store}>
+        <MainComponent />
+    </Provider>, 
+    document.getElementById("root")); 

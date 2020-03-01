@@ -2,7 +2,7 @@ import React from "react";
 
 import Payment from "./payment";
 
-import {paymentTypes} from "../variables";
+import {paymentTypes} from "../../variables";
 
 export default function(props) {
     return (

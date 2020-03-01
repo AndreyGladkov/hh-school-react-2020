@@ -2,7 +2,7 @@ import React from "react";
 
 import Notification from "./notification";
 
-import {notificationTypes} from "../variables";
+import {notificationTypes} from "../../variables";
 
 export default function(props) {
     return (

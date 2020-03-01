@@ -1,6 +1,6 @@
 import React from "react";
 
-import {cities} from "../variables";
+import {cities} from "../../variables";
 
 export default function(props) {
     return (

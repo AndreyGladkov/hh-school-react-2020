@@ -599,7 +599,7 @@ input[type=radio]:checked + .radio-button-text::before {
   background-color: white;
 }
 .product-card_dropdown {
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05), 0 20px 20px rgba(0, 0, 0, 0.04);
   margin-left: -20px;
   margin-top: -20px;
   padding: 20px;
@@ -815,7 +815,7 @@ input[type=radio]:checked + .radio-button-text::before {
 }
 @media (min-width: 768px) {
   .slider-wrapper {
-    margin: 0 -15px;
+    margin: 0 5px; /*было -15*/
   }
 }
 @keyframes slide {
@@ -841,19 +841,26 @@ input[type=radio]:checked + .radio-button-text::before {
   }
 }
 .slider-content_hide {
-  animation: slide 0.5s ease-in-out;
-  animation-fill-mode: forwards;
+  animation: slide 0.5s ease-in-out; 
+  animation-fill-mode: forwards; 
 }
+
 .slider-content_show {
   display: flex;
   animation: slide 0.5s ease-in-out;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; 
+}
+.slider-content_animation-reverse {
+  animation-direction: reverse; 
 }
 .slider-content_hide {
   display: flex;
 }
+
+
 .slider-content_active {
   display: flex;
+  /* transform: translate(0%, 0%); */
 }
 @media (min-width: 768px) {
   .slider-content__image-container {
@@ -924,8 +931,11 @@ input[type=radio]:checked + .radio-button-text::before {
   align-items: center;
   opacity: 0;
   transition-property: opacity;
-  transition-duration: 0.7s;
-  transition-timing-function: ease-out;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+.dropdown-product_opacity {
+  opacity: 1;
 }
 .dropdown-product__elements {
   width: 100%;

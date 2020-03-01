@@ -14,7 +14,7 @@ module.exports = function() {
            "name":"Зонт",
            "image":"images/product-1.jpg",
            "price":"1 990",
-           "oldPrice":"undefined",
+           "oldPrice":undefined,
            "sale":false,
            "description":"Красный зонт",
            "sizes":[
@@ -26,7 +26,7 @@ module.exports = function() {
            "name":"Сумка",
            "image":"images/product-2.jpg",
            "price":"290",
-           "oldPrice":"undefined",
+           "oldPrice":undefined,
            "sale":false,
            "description":"Красная сумка",
            "sizes":[
@@ -38,7 +38,7 @@ module.exports = function() {
            "name":"Шлепанцы",
            "image":"images/product-3.jpg",
            "price":"790",
-           "oldPrice":"undefined",
+           "oldPrice":undefined,
            "sale":false,
            "description":"Красные шлепанцы",
            "sizes":[
@@ -71,6 +71,7 @@ module.exports = function() {
            "name":"Толстовка",
            "image":"images/product-5.jpg",
            "price":"3 990",
+           "oldPrice":undefined,
            "sale":false,
            "description":"Красная толстовка",
            "sizes":[
@@ -88,6 +89,7 @@ module.exports = function() {
            "image":"images/product-6.jpg",
            "price":"990",
            "sale":false,
+           "oldPrice":undefined,
            "description":"Красная подушка",
            "sizes":[
               "0"

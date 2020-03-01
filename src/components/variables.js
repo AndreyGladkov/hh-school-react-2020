@@ -61,7 +61,6 @@ export const navItems = [
 export const sliderItems = [
     {
         id: "1",
-        active: true,
         text: "Мужская и женская одежда с\u00A0символикой HeadHunter",
         image1x: "images/img-01.png",
         image2x: "images/img-01@2x.png",
@@ -70,14 +69,12 @@ export const sliderItems = [
     },
     {
         id: "2",
-        active: false,
         text: "Офисные принадлежности с\u00A0символикой HeadHunter",
         image1x: "images/img-02.png",
         image2x: "images/img-02@2x.png",
         image3x: "images/img-02@3x.png",
         redirect: "Перейти в каталог"
-    },
-
+    }
 ]
 
 export const serviceItems = [

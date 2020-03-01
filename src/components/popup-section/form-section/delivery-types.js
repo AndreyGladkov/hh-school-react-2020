@@ -2,7 +2,7 @@ import React from "react";
 
 import Delivery from "./delivery";
 
-import {deliveryTypes} from "../variables";
+import {deliveryTypes} from "../../variables";
 
 export default function(props) {
     return (

@@ -4,7 +4,8 @@ export default function(props) {
     return (
         <button 
             data-slide-id={props.id} 
-            className={`js-slide-button slider-content-block-dots__dot-container ${props.active && "slider-content-block-dots__dot-container_choosen"}`}>
+            className={`slider-content-block-dots__dot-container ${props.active && "slider-content-block-dots__dot-container_choosen"}`}
+            onClick={props.onClick}>
         </button> 
     );
 }
