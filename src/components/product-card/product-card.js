@@ -2,14 +2,15 @@ import React, { PureComponent } from "react";
 
 import Size from "./size";
 
-import {currentCurrency, products} from "../variables";
+import {currentCurrency} from "../variables";
 
 export default class CatalogSection extends PureComponent{
 
     state = {
         startAnimation: false,
         productFull: false,
-        redirectButton: false
+        redirectButton: false,
+        choosenSize: null
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -48,16 +49,18 @@ export default class CatalogSection extends PureComponent{
                             {this.props.oldPrice && <span className="product-card__old-price">{this.props.oldPrice}{currentCurrency}</span>}
                             {this.props.price}{currentCurrency}
                         </div>
-                        {(this.state.productFull || this.props.popup) && <div className={`js-dropdown-product dropdown-product ${this.state.startAnimation && "dropdown-product_opacity"}`}>
+                        {(this.state.productFull || this.props.popup) && <div className={`js-dropdown-product dropdown-product ${(this.state.startAnimation || this.props.popup)  && "dropdown-product_opacity"}`}>
                             <div className="js-order-product-description product-card__description">{this.props.description}</div>
                             <div className="js-order-product-sizes product-card__sizes">
-                                {this.props.sizes.map((el) => 
+                                {this.props.sizes.map((el, ind) => 
                                 <Size 
                                     key={el}
                                     name={el}
+                                    choosenSize={this.props.choosenSize === ind}
                                     onClick={
                                         () => {
-                                            this.setState({redirectButton: true});
+                                            this.setState({redirectButton: true, choosenSize: ind});
+                                            if (this.props.popup) this.props.changePopupState({size: el});
                                         }
                                     }
                                 />
@@ -66,7 +69,12 @@ export default class CatalogSection extends PureComponent{
                             {this.props.catalog && <div className="dropdown-button-container">
                                 <button 
                                     className="js-dropdown-button button dropdown-button-container__button"
-                                    disabled={!this.state.redirectButton}>
+                                    disabled={!this.state.redirectButton}
+                                    onClick={
+                                        () => {  
+                                            this.props.showOrderFormAction(this.props.active,this.state.choosenSize);
+                                        }
+                                    }>
                                     Заказать
                                 </button>
                             </div>}

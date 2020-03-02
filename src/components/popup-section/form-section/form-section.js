@@ -9,14 +9,11 @@ import NotificationType from "./notification-types";
 export default function(props) {
     return (
         <form className="popup-content-form-order">
-            <PersonalData/>
-            <DeliveryType/>
-            <Address/>
-            <PaymentType/>
-            <NotificationType/>
-            <div className="form-order-group">
-                <button className="js-submit button form-order-confirm-button_button">Оформить заказ</button>
-            </div>
+            <PersonalData changePopupState={props.changePopupState}/>
+            <DeliveryType changePopupState={props.changePopupState}/>
+            <Address changePopupState={props.changePopupState}/>
+            <PaymentType changePopupState={props.changePopupState}/>
+            <NotificationType changePopupState={props.changePopupState}/>
         </form>
     );
 }

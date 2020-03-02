@@ -6,7 +6,7 @@ import SliderSection from "./slider-section/slider-section";
 import CatalogSection from "./catalog-section/catalog-connect";
 import ServicesSection from "./services-section/services-section";
 import FooterSection from "./footer-section/footer-section";
-import PopupSection from "./popup-section/popup-section";
+import PopupSection from "./popup-section/popup-connect";
 
 export default function(props) {
     return (

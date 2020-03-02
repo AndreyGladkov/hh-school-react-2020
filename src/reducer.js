@@ -1,18 +1,23 @@
 export function reducer (state = [], action) {
     switch (action.type) {
         case 'requestAction':
-            console.log("rP");
             return state;
         case 'requestSuccess':
             return {
                 ...state,
                 product: action.product
             };
-        case 'openFormAction':
-            console.log(action);
+        case 'showOrderFormAction':
             return {
                 ...state,
-                selectedProduct: true
+                showOrderForm: true,
+                selectedProduct: action.productInd,
+                selectedSize: action.sizeInd
+            }
+        case 'closeOrderFormAction':
+            return {
+                ...state,
+                showOrderForm: false
             }
         default:
             return state

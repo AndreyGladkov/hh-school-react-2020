@@ -24,7 +24,6 @@ export default class CatalogSection extends React.PureComponent {
         if (this.productRefs.length !== this.props.product.length)
         {
             this.productRefs = this.props.product.map(() => React.createRef());
-            console.log(this.productRefs);
         }
     }
 
@@ -47,8 +46,8 @@ export default class CatalogSection extends React.PureComponent {
                                 catalog={true}
                                 active={this.state.productActive}
                                 full={this.state.productActive === ind}
-                                current={ind}
                                 productRef={this.productRefs[ind]}
+                                showOrderFormAction={this.props.showOrderFormAction}
                                 onClick={
                                     () => {
                                         this.setState({productActive: ind});

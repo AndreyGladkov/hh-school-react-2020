@@ -1,3 +1,3 @@
-export const openFormAction = {
-    type: "openFormAction"
+export const closeOrderFormAction = {
+    type: "closeOrderFormAction"
 }

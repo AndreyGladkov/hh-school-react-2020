@@ -56,7 +56,7 @@ module.exports = function() {
            "price":"390",
            "oldPrice":"690",
            "sale":true,
-           "description":"Красная хлопковая футболка с&#160;коротким рукавом",
+           "description":"Красная хлопковая футболка с\u00A0коротким рукавом",
            "sizes":[
               "XS",
               "S",

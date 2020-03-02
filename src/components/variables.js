@@ -208,7 +208,7 @@ export const deliveryTypes = [
     }
 ]
 
-export const cities = ["Москва", "Санкт-Петербург"]
+export const cities = ["Москва", "Санкт-Петербург", "Щелково", "Балашиха", "Казань"]
 
 export const paymentTypes = [
     {
