@@ -6,7 +6,6 @@ export default function(props) {
             <input 
                 ref={props.notificationRef}
                 onChange={props.onChange}
-                className="js-notice" 
                 type="checkbox" 
                 value={props.tag} 
                 id={props.tag}/>

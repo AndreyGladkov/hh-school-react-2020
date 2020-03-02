@@ -3,43 +3,69 @@ import React from "react";
 import {cities} from "../../variables";
 import City from "./city";
 
-export default class PersonalData extends React.PureComponent{
-
-    refAddress = React.createRef();
-    refCity = React.createRef();
-
-    state = {
-        validationAddress: true
-    }
+export default class Address extends React.PureComponent{
 
     constructor(props){
-        super(props);
-        props.changePopupState({city: "Москва"})
+        super(props);  
+
+        this.refAddress = React.createRef();
+        this.refSelectWrapper = React.createRef();
+        this.refCitySelect = React.createRef();
+        this.refCityOption = cities.map(() => React.createRef());
+        this.city = '';
+
+        this.state = {
+            validationAddress: true,
+            selectOpen: false,
+            choosenCity: null
+        }
+    }
+
+    componentDidMount() {
+
+        window.addEventListener("click",(event) => {
+        if (this.refSelectWrapper.current !== null 
+            && !(this.refSelectWrapper.current.contains(event.target))) {
+            this.setState({selectOpen: false})
+        }
+        }, true)
     }
 
     render() {
         return (
             <div className="form-order-group">
                 <label className="form-order__label">Адрес</label>
-                <div className="form-order-address-list">
-                    <div className="select-wrapper">
-                        <select 
-                            className="js-select-cities select" 
-                            ref={this.refCity}
-                            onChange={
+                <div 
+                    className="form-order-address-list" 
+                    ref={this.refSelectWrapper}>
+                    <div className={`${this.state.selectOpen ? "select-after-open" : "select-after"}`}>
+                        <input 
+                            className={`select-city ${this.state.selectOpen && "select-city-focus"}`}
+                            ref={this.refCitySelect}
+                            value={`${this.state.choosenCity ? this.state.choosenCity : "Город"}`}
+                            onFocus={
                                 () => {
-                                    this.props.changePopupState({city: this.refCity.current.value})
-                                }
-                        }>
+                                    this.setState({selectOpen: true})
+                            }
+                        }
+                        readOnly
+                        />
+                    </div>
+                    {this.state.selectOpen && <div className="select-wrapper">
                         {cities.map((el,ind) => 
                             <City 
                                 key={el}
-                                active={el === "Москва"}
                                 city={el}
+                                refCity={this.refCityOption[ind]}
+                                onFocus={
+                                    () => {
+                                        this.setState({choosenCity: el, selectOpen: false});
+                                        this.props.changePopupState({city: el})
+                                    }
+                                }
                             />
                         )} 
-                        </select>
-                    </div>
+                    </div>}
                 </div>
                 <div className="form-order-address-text">
                     <textarea 

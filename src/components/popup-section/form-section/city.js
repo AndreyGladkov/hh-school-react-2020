@@ -2,12 +2,12 @@ import React from "react";
 
 export default function(props) {
     return (
-        <option 
+        <input 
             className="option" 
-            id={props.id}
-            defaultValue={props.active}
-            onChange={props.onChange}>
-            {props.city}
-        </option>
+            readOnly 
+            value={props.city}
+            ref={props.refCity}
+            onFocus={props.onFocus}>
+        </input>
     );
 }

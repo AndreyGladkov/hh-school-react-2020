@@ -31,13 +31,15 @@ export default class PopupSection extends React.PureComponent {
             this.setState({
                 product: this.props.product[this.props.selectedProduct].id,
                 size: this.props.product[this.props.selectedProduct].sizes[this.props.selectedSize],
-                startAnimationOpen: true
+                startAnimationOpen: true,
+                startAnimationClose: false
             })
         }
         if (this.props.showOrderForm)
         {  
             window.document.body.style.overflow = "hidden";
         }
+        else window.document.body.style.overflow = "scroll";
     }
 
     render() {
@@ -58,7 +60,7 @@ export default class PopupSection extends React.PureComponent {
                         <div className="popup-header">
                             <h1 className="heading">Оформление заказа</h1>
                             <div 
-                                className="js-order-close nav-close"
+                                className="nav-close"
                                 onClick={ () => {
                                     this.setState({startAnimationClose: true, startAnimationOpen: false});
                                 }}
@@ -112,10 +114,11 @@ export default class PopupSection extends React.PureComponent {
             this.state.country &&
             this.state.code && 
             this.state.number &&
+            this.state.city &&
             this.state.address 
-            )
+        )
         {
-            console.log(
+            alert(
                 "ФИО: " + this.state.fio + "\n" + 
                 "Email: " + this.state.email + "\n" +
                 "Номер: " + this.state.country + " " +
@@ -132,7 +135,7 @@ export default class PopupSection extends React.PureComponent {
         }
         else 
         {
-            console.log("Заполните корректно все поля!");
+            alert("Заполните корректно все поля!");
         }
     }
 }

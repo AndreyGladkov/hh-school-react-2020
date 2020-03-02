@@ -3,8 +3,7 @@ import React from "react";
 export default function(props) {
     return (
         <React.Fragment>
-            <input 
-                className="js-radio-delivery" 
+            <input
                 type="radio" id={props.tag} 
                 value={props.tag} 
                 name="type-delivery"

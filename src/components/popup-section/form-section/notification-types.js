@@ -11,8 +11,6 @@ export default class NotificationType extends React.PureComponent{
         this.notificationRefs = notificationTypes.map(() => React.createRef());
     }
 
-    notificationRefs = [];
-
     render() {
         return (
             <div className="form-order-group">

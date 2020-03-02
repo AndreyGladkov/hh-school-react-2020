@@ -7,24 +7,24 @@ import {currentCurrency} from "../variables";
 export default class CatalogSection extends PureComponent{
 
     state = {
-        startAnimation: false,
+        startAnimationOpen: false,
         productFull: false,
         redirectButton: false,
         choosenSize: null
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps,prevState){
         if (!prevProps.full && this.props.full)
         {
             this.setState({productFull: true})
         }
         if (prevProps.full && !this.props.full)
         {
-            this.setState({productFull: false, startAnimation: false, redirectButton: false})
+            this.setState({productFull: false, redirectButton: false})
         }
         if (!prevState.productFull && this.state.productFull)
         {
-            setTimeout(() => {this.setState({startAnimation: true})}, 0);
+            this.setState({startAnimationOpen: true})
         }
     }
 
@@ -34,8 +34,7 @@ export default class CatalogSection extends PureComponent{
                 <div className="position-product-card">
                     <div 
                         ref={this.props.productRef}
-                        className={`product-card ${this.state.productFull && "product-card_dropdown"}`}
-                        data-product-id={this.props.id} 
+                        className={`product-card ${this.state.productFull && "product-card_dropdown"}`} 
                         onClick={this.props.onClick}
                         onMouseEnter={this.onMouseEnter}
                         onMouseLeave={this.onMouseLeave}
@@ -49,9 +48,12 @@ export default class CatalogSection extends PureComponent{
                             {this.props.oldPrice && <span className="product-card__old-price">{this.props.oldPrice}{currentCurrency}</span>}
                             {this.props.price}{currentCurrency}
                         </div>
-                        {(this.state.productFull || this.props.popup) && <div className={`js-dropdown-product dropdown-product ${(this.state.startAnimation || this.props.popup)  && "dropdown-product_opacity"}`}>
-                            <div className="js-order-product-description product-card__description">{this.props.description}</div>
-                            <div className="js-order-product-sizes product-card__sizes">
+                        {(this.state.productFull || this.props.popup) && 
+                            <div className={`
+                                dropdown-product 
+                                ${(this.state.startAnimationOpen || this.props.popup)  && "dropdown-product_opacity"}`}>
+                            <div className="product-card__description">{this.props.description}</div>
+                            <div className="product-card__sizes">
                                 {this.props.sizes.map((el, ind) => 
                                 <Size 
                                     key={el}
@@ -68,7 +70,7 @@ export default class CatalogSection extends PureComponent{
                             </div> 
                             {this.props.catalog && <div className="dropdown-button-container">
                                 <button 
-                                    className="js-dropdown-button button dropdown-button-container__button"
+                                    className="button dropdown-button-container__button"
                                     disabled={!this.state.redirectButton}
                                     onClick={
                                         () => {  
@@ -92,6 +94,6 @@ export default class CatalogSection extends PureComponent{
 
     // onMouseLeave = () => {
     //     if (this.props.active !== this.props.current)
-    //        this.setState({productFull: false, startAnimation: false});
+    //        this.setState({productFull: false, startAnimationOpen: false});
     // }
 }

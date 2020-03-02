@@ -12,8 +12,6 @@ export default class DeliveryType extends React.PureComponent{
         props.changePopupState({delivery: deliveryTypes[0].tag})
     }
 
-    deliveryRefs = [];
-
     render() {
         return (
         <div className="form-order-group">

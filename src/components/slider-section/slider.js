@@ -8,8 +8,7 @@ export default function(props) {
             ${props.previous && props.needAnimation && "slider-content_hide"}
             ${props.active && props.needAnimation && "slider-content_show"}
             ${props.forwards && props.needAnimation && "slider-content_animation-reverse"}
-            ${props.active && !props.needAnimation && "slider-content_active"} 
-            js-slide`}
+            ${props.active && !props.needAnimation && "slider-content_active"}`}
             onAnimationEnd={props.onAnimationEnd}
             >
             <div className="slider-content__image-container column column_s-2 column_m-3 column_l-6">

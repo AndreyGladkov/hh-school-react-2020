@@ -12,8 +12,6 @@ export default class PaymentType extends React.PureComponent{
         props.changePopupState({payment: paymentTypes[0].tag})
     }
 
-    paymentRefs = [];
-
     render() {
         return (
             <div className="form-order-group">

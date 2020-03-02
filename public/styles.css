@@ -314,28 +314,42 @@ input[type=checkbox]:checked + label::before {
   background-position: center;
 }
 .select-wrapper {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.15), 0 20px 20px rgba(0, 0, 0, 0.10);
 }
-.select-wrapper::after {
-  content: '';
+
+.select-after::after {
+  content: ''; 
   display: inline-block;
-  background: url('../icons/arrow.svg') no-repeat center #F9F9F9;
+  background: url('../icons/arrow-normal.svg') no-repeat center #F9F9F9;
   width: 28px;
   height: 38px;
   position: absolute;
   right: 0;
-  border: 1px solid #C5C9CA;
+  border: 1px solid #C5C9CA; 
   box-sizing: border-box;
   border-radius: 0px 2px 2px 0px;
-  pointer-events: none;
+  pointer-events: none; 
   margin-top: 5px;
 }
-.select-wrapper.active::after {
-  background-color: #EEE;
-  transform: rotate(180deg);
-  border-radius: 2px 0px 0px 2px;
+
+.select-after-open::after {
+  content: ''; 
+  display: inline-block;
+  background: url('../icons/arrow-open.svg') no-repeat center #F9F9F9;
+  width: 28px;
+  height: 38px;
+  position: absolute;
+  right: 0;
+  border: 1px solid #C5C9CA; 
+  box-sizing: border-box;
+  border-radius: 0px 2px 2px 0px;
+  pointer-events: none; 
+  margin-top: 5px;
 }
-.select {
+
+.select-city {
   background: #F9F9F9;
   border: 1px solid #C5C9CA;
   box-sizing: border-box;
@@ -347,11 +361,13 @@ input[type=checkbox]:checked + label::before {
   margin-top: 5px;
   font: normal 14px/20px Arial;
 }
-.select:active,
-.select:focus {
+
+.select-city-focus {
   background: #EEE;
 }
+
 .option {
+  border: none;
   outline: none;
   background: #FFF;
   padding: 11px 12px;
@@ -362,7 +378,7 @@ input[type=checkbox]:checked + label::before {
   line-height: 30px;
   color: #333;
 }
-.option:active,
+.option:hover,
 .option:focus {
   background: #0F8FEE;
   color: #FFF;
@@ -925,18 +941,28 @@ input[type=radio]:checked + .radio-button-text::before {
 .slider-content-block-dots__dot-container_choosen {
   background-color: #212122;
 }
+
+@keyframes dropdown-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dropdown-product_opacity  {
+  animation: dropdown-opacity 0.5s linear; 
+  animation-fill-mode: forwards; 
+}
+
 .dropdown-product {
   display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 0;
-  transition-property: opacity;
-  transition-duration: 0.4s;
-  transition-timing-function: linear;
 }
-.dropdown-product_opacity {
-  opacity: 1;
-}
+
 .dropdown-product__elements {
   width: 100%;
   display: flex;
@@ -1094,6 +1120,9 @@ input[type=radio]:checked + .radio-button-text::before {
 }
 .form-order-address-text {
   margin-top: 10px;
+}
+.form-order-address-list {
+  position: relative;
 }
 .form-order-radio-group__element {
   margin-top: 10px;
