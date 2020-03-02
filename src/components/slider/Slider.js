@@ -33,10 +33,6 @@ export default class Slider extends React.Component {
 					active: this.state.active + 1
 				})
 			}
-
-			this.setState({
-				active: this.state.active
-			});
 		}
 	}
 
@@ -66,10 +62,10 @@ export default class Slider extends React.Component {
 
 	renderSlides() {
 
-		return this.slides.map((item, index) => (
+		return this.slides.map((item) => (
 			<div 
 				className={"slider-section__slide"}
-				key={index}
+				key={item.id}
 				style={this.setSliderStyles()}
 			>
 				<div className="columns-row">
