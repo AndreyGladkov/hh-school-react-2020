@@ -1,0 +1,83 @@
+@import '../../common/variables.less';
+
+@keyframes slide {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100%, 0);
+  }
+}
+
+.carousel-card {
+  flex: 0 0 auto;
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  min-height: 380px;
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+
+  @media @screen-gt-s {
+    flex-wrap: nowrap;
+    text-align: left;
+    min-height: 300px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  @media @screen-gt-m {
+    min-height: 430px;
+  }
+
+  &_active {
+    display: flex;
+  }
+
+  &_hide {
+    display: flex;
+    animation: slide 0.5s ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  &_show {
+    display: flex;
+    animation: slide 0.5s ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  &__description {
+    width: 100%;
+    order: 2;
+
+    @media @screen-gt-s {
+      width: 50%;
+      order: 1;
+    }
+
+    &-title {
+      margin-bottom: 10px;
+
+      @media @screen-gt-s {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__image {
+    display: block;
+
+    &-container {
+      width: 100%;
+      order: 1;
+
+      @media @screen-gt-s {
+        width: 50%;
+        order: 2;
+      }
+    }
+  }
+}

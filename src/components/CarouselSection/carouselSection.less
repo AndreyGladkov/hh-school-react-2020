@@ -1,0 +1,19 @@
+@import "../common/Layout/layout.less";
+
+.carousel-section {
+  background-color: #f9f9f9;
+  position: relative;
+  padding-bottom: 20px;
+
+  &__cards-wrapper {
+    .columns-row();
+    flex-wrap: nowrap;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+
+    @media @screen-gt-s {
+      margin: 0;
+    }
+  }
+}

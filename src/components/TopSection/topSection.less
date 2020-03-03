@@ -1,0 +1,35 @@
+@import '../common/variables.less';
+
+.top-section {
+  display: none;
+
+  @media @screen-gt-s {
+    display: block;
+  }
+
+  &__content {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__nav {
+    &-list {
+      font-size: 14px;
+    }
+
+    &-item {
+      margin-left: 20px;
+    }
+
+    &-link {
+      color: #609fcf;
+
+      &:hover {
+        color: #c00;
+        text-decoration: none;
+      }
+    }
+  }
+}
