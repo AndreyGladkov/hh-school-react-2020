@@ -1,0 +1,81 @@
+@import './fonts.less';
+@import './variables.less';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  font: 14px/1.43 Arial, sans-serif;
+  color: @color-text;
+
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+a {
+  color: #609fcf;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    color: #c00;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.visuallyhidden {
+  opacity: 0;
+  transition: opacity .1s;
+}
+
+.heading {
+  font: normal 26px/36px @font-family-heading;
+  margin: 0 0 20px;
+
+  @media @screen-gt-s {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  &_level-2 {
+    font-size: 20px;
+    line-height: 24px;
+
+    @media @screen-gt-s {
+      font-size: 30px;
+      line-height: 37px;
+    }
+  }
+
+  &_level-3 {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 10px;
+
+    @media @screen-gt-s {
+      font-size: 22px;
+      line-height: 27px;
+    }
+  }
+}

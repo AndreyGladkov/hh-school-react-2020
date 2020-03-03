@@ -1,0 +1,28 @@
+@import '../../common/Layout/layout.less';
+
+.carousel-dots {
+  .columns-row();
+  justify-content: center;
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    width: 8px;
+    height: 8px;
+    background: #dfdedd;
+    border-radius: 50%;
+    margin-right: 5px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &_active {
+      background: #212122;
+    }
+  }
+}

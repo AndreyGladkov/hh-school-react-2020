@@ -1,0 +1,78 @@
+[
+  {
+    "id": "01",
+    "dataName": "unbrella",
+    "name": "Зонт",
+    "description": "Красный элегантный зонт",
+    "image": "images/product-1.jpg",
+    "price": "1 990 ₽",
+    "oldPrice": ""
+  },
+  {
+    "id": "02",
+    "dataName": "bag",
+    "name": "Сумка",
+    "description": "Красная стильная сумка из переработанного хлопка",
+    "image": "images/product-2.jpg",
+    "price": "290 ₽",
+    "oldPrice": ""
+  },
+  {
+    "id": "03",
+    "dataName": "slippers",
+    "name": "Шлепанцы",
+    "description": "Красные резиновые шлепанцы",
+    "image": "images/product-3.jpg",
+    "price": "790 ₽",
+    "oldPrice": "",
+    "sizes": {
+      "35": true,
+      "36": true,
+      "37": false,
+      "40": true
+    }
+  },
+  {
+    "id": "04",
+    "dataName": "t-shirt",
+    "name": "Футболка",
+    "description": "Красная хлопоковая футболка с коротким руковом",
+    "image": "images/product-4.jpg",
+    "price": "390 ₽",
+    "oldPrice": "690",
+    "sizes": {
+      "xs": true,
+      "s": true,
+      "m": true,
+      "l": true,
+      "xl": true,
+      "xxl": true
+    }
+  },
+  {
+    "id": "05",
+    "dataName": "hoodie",
+    "name": "Толстовка",
+    "description": "Красная хлопоковая толстовка с карманами",
+    "image": "images/product-5.jpg",
+    "price": "3 990 ₽",
+    "oldPrice": "",
+    "sizes": {
+      "xs": true,
+      "s": true,
+      "m": true,
+      "l": true,
+      "xl": false,
+      "xxl": true
+    }
+  },
+  {
+    "id": "06",
+    "dataName": "pillow",
+    "name": "Подушка",
+    "description": "Красная декоративная подушка",
+    "image": "images/product-6.jpg",
+    "price": "990 ₽",
+    "oldPrice": ""
+  }
+]
