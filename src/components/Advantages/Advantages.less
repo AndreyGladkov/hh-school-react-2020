@@ -1,0 +1,40 @@
+@import './../../less/variables.less';
+
+.how-we-work {
+    background-color: #EEEEEE; 
+    padding: 15px 0;
+
+    &__item {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+
+    &__text {
+        margin-left: 20px;
+
+        @media @screen-gt-s {
+            margin-left: 10px;
+        }
+
+    }
+
+}
+
+.how-we-work-icon {
+    height: 35px;
+    width: 35px;
+    display: block;
+
+    @media @screen-gt-s {
+        height: 40px;
+        width: 40px;
+    }
+
+    @media @screen-gt-m {
+        height: 50px;
+        width: 50px;
+    }
+
+}

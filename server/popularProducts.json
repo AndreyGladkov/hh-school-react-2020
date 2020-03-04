@@ -1,0 +1,62 @@
+[
+    {
+      "id": "1",
+      "name": "Зонт",
+      "description": "Красный зонт с логотипом HH",
+      "image": "/static/images/product-1.jpg",
+      "price": "1 990",
+      "salePrice": "",
+      "currency": "₽",
+      "sizes": []
+    },
+    {
+      "id": "2",
+      "name": "Сумка",
+      "description": "Красная сумка с логотипом HH",
+      "image": "/static/images/product-2.jpg",
+      "price": "290",
+      "salePrice": "",
+      "currency": "₽",
+      "sizes": []
+    },
+    {
+      "id": "3",
+      "name": "Шлепанцы",
+      "description": "Красные шлепанцы с логотипом HH",
+      "image": "/static/images/product-3.jpg",
+      "price": "790",
+      "salePrice": "",
+      "currency": "₽",
+      "sizes": ["39", "40", "41", "42", "43", "44"]
+    },
+    {
+      "id": "4",
+      "name": "Футболка",
+      "description": "Красная футболка с логотипом HH",
+      "image": "/static/images/product-4.jpg",
+      "price": "690",
+      "currency": "₽",
+      "salePrice": "390",
+      "sizes": ["XS", "S", "M", "L", "XL", "XXL"]
+    },
+    {
+      "id": "5",
+      "name": "Толстовка",
+      "description": "Красная толстовка с логотипом HH",
+      "image": "/static/images/product-5.jpg",
+      "price": "3 990",
+      "salePrice": "",
+      "currency": "₽",
+      "sizes": ["XS", "S", "M", "L", "XL", "XXL"]
+    },
+    {
+      "id": "6",
+      "name": "Подушка",
+      "description": "Красная подушка с логотипом HH",
+      "image": "/static/images/product-6.jpg",
+      "price": "990",
+      "salePrice": "",
+      "currency": "₽",
+      "sizes": []
+    }
+  ]

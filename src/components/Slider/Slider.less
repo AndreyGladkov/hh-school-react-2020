@@ -1,0 +1,102 @@
+@import "./../../less/variables.less";
+@import "./../../less/button/button.less";
+@import "./../../components/Common/Grid/Grid.less";
+
+.slider-wrapper {
+  .columns-row();
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+
+  @media @screen-gt-s {
+    padding-left: 15px;
+  }
+}
+
+.slide {
+  display: flex;
+  position: relative;
+  transition: transform 1s ease-out;
+  will-change: transform;
+
+  @media @screen-only-s {
+    flex-direction: column;
+  }
+
+  &__heading-wrapper {
+    margin-top: 40px;
+
+    @media @screen-only-s {
+      text-align: center;
+    }
+
+    @media @screen-gt-s {
+      margin-top: 75px;
+    }
+
+    @media @screen-gt-m {
+      margin-top: 160px;
+    }
+
+    .button {
+      margin-top: 20px;
+    }
+  }
+
+  &__image-container {
+    margin-top: 30px;
+
+    @media @screen-gt-s {
+      margin-top: 57px;
+    }
+
+    @media @screen-gt-m {
+      margin-top: 60px;
+    }
+  }
+
+  &__image {
+    max-width: 100%;
+  }
+}
+
+.slider {
+  height: 408px;
+  position: relative;
+
+  @media @screen-gt-s {
+    height: 340px;
+  }
+
+  @media @screen-gt-m {
+    height: 480px;
+  }
+}
+
+.slider-nav {
+  .columns-wrapper();
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+
+  @media @screen-only-s {
+    bottom: 157px;
+  }
+
+  &__dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #dfdedd;
+    margin-left: 4px;
+    cursor: pointer;
+
+    &__active {
+      background-color: @color-dark;
+    }
+  }
+}

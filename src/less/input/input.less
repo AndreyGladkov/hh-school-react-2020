@@ -1,0 +1,48 @@
+.input {
+    width           : 100%;
+    height          : @control-height;
+    background-color: #ffffff;
+    border          : 1px solid #DFDEDD;
+    box-sizing      : border-box;
+    padding-left    : 10px;
+    font            : 14px/20px Arial;
+    margin-top      : 10px;
+
+    &_error {
+        border-color: #c52929;
+    }
+
+    &_error-text {
+        position: absolute;
+        margin-top: 5px;
+        right: 0;
+        border: 1px solid;
+        background-color: rosybrown;
+        padding: 3px; 
+        z-index: 9999;  
+    }
+}
+
+.telephone-input {
+    display: flex;
+    padding: 0;
+
+    &__country-code {
+        width : 38px;
+        margin: -1px 0 0 -1px;
+    }
+
+    &__code {
+        width : 63px;
+        margin: -1px 0 0 -1px;
+    }
+
+    &__number {
+        margin   : -1px 0 0 -1px;
+        flex-grow: 1;
+    }
+}
+
+.input-wrapper {
+    position: relative;
+}

@@ -14,7 +14,7 @@ export function Column(props) {
   const quantityColumnsM = props.quantityColumnsM || "2";
   const quantityColumnsL = props.quantityColumnsL || "4";
   
-  let columnClass = `column column_s-${quantityColumnsS} column_m-${quantityColumnsM} column_l-${quantityColumnsL}`;
+  let columnClass = `column column_s-${quantityColumnsS} column_m-${quantityColumnsM} column_l-${quantityColumnsL} ${(props.beFirst) ? "be-first" : ""}`;
   
   return <div className={columnClass}>{props.children}</div>;
 }

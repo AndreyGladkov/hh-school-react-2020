@@ -1,0 +1,24 @@
+.checkbox {
+    display: flex;
+	margin: 12px 0 18px 0;
+	
+	&__box {
+		width: 16px;
+		height: 16px;
+		border: 1px solid #c5c9ca;
+		box-sizing: border-box;
+		border-radius: 2px;
+		background: #ffffff;
+		margin-right: 10px;
+		transition: background-image 0.2s ease;
+	}
+
+	&__input {
+		display: none;
+		
+		&:checked + .checkbox__box {
+				background: url("check.svg") no-repeat center center;
+			}
+	}
+
+}

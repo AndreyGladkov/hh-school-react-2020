@@ -1,0 +1,78 @@
+@import './../variables.less';
+
+.radio-box {
+    box-sizing: border-box;
+    position: relative;
+    height: @control-height;
+    width: 100%; 
+    display: block;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid #DFDEDD;
+    margin: -1px 0 0 -1px;
+
+    &__text {
+        height: 100%;
+        width: 100%;
+        display: block; 
+        background-color: #ffffff;
+        line-height: @control-height;
+        text-align: center;
+    }
+
+    &__input {
+        position: absolute;
+        cursor: pointer;
+        opacity: 0;
+        &:checked~span {
+            background-color: #EEEEEE;       
+        }   
+    }   
+}
+
+.radio-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 11px;
+}
+
+.radio {
+    display: flex;
+    margin-bottom: 15px;
+    font: 14px/20px Arial, sans-serif; 
+    
+    &__input {
+        display: none;
+        &:checked +
+        .radio__box {
+                border: none;
+                background: url("radio.svg") no-repeat center center;
+            }
+        
+    }
+
+    &__box {
+        width: 16px;
+        height: 16px;
+        border: 1px solid #c5c9ca;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background: #ffffff;
+        margin-right: 10px;
+        transition-duration: 0.2s;
+        transition-timing-function: ease;
+        transition-property: border, background-image, background-color;
+        -webkit-appearance: none;
+    }
+
+    &__input-box {
+        position: absolute;
+        cursor: pointer;
+        opacity: 0;
+        &:checked~span {
+            background-color: #EEEEEE;       
+        }   
+    }
+
+}

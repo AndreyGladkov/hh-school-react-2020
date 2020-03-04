@@ -1,0 +1,133 @@
+@import './../../less/variables.less';
+@import './../../less/radio/radio.less';
+
+.product-card-wrapper {
+    width: 280px;
+    background-color: #ffffff;
+    padding: 20px 27px 20px 20px;
+    box-sizing: border-box;
+    z-index: 999;
+  
+    @media @screen-gt-s {
+      width: 242px;
+      padding: 15px;
+    }
+  
+    @media @screen-gt-m {
+      width: 290px;
+      padding: 20px;
+    }
+  }
+  
+  .product-card-form-wrapper {
+    width: 290px;
+    display: none;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    z-index: 999;
+    margin: 96px 0 0 44px;
+  
+    @media @screen-gt-s {
+      display: block;
+    }
+  
+    @media @screen-gt-m {
+      margin: 96px 0 0 80px;
+    }
+  }
+  
+  .product-card {
+    position: relative;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+    
+    &__image-container {
+      position: relative;
+      margin-bottom: 10px;
+      font-size: 0;
+    }
+  
+    &__image {
+      max-width: 100%;
+    }
+  
+    &__name {
+      font: bold 16px/1.2 @font-family-heading;
+      margin-bottom: 10px;
+    }
+  
+    &__old-price {
+      text-decoration: line-through;
+      color: #aeb5b9;
+      margin-right: 10px;
+    }
+  
+    &__sale {
+      position: absolute;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      background-color: #212122;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      text-align: center;
+      font: 12px/30px @font-family-heading;
+  
+      @media @screen-gt-s {
+        height: 40px;
+        width: 40px;
+        line-height: 38px;
+      }
+    }
+  
+    @keyframes showDetails {
+      from {
+        opacity: 0;
+      } to {
+        opacity: 1;
+      }
+  }
+  
+    .product-card__details {
+      display: none;
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+      background-color: #ffffff;
+      padding: 10px 15px 20px 15px;
+      margin: 0px -15px;
+      
+      &_show {
+        display: block;
+        box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.1);
+        animation: showDetails .3s ease-in-out;
+        animation-fill-mode: forwards;
+      }
+  
+    }
+  
+    &__description {
+      font: normal 14px/20px Arial;
+      margin-bottom: 10px;
+      color: #666666;
+    }
+  
+    &__sizes {
+      display: flex;
+      justify-content: center;
+      user-select: none;
+      margin: 15px 0;
+      padding: 0;
+    }
+  
+    &__size {
+      width: 41px;
+  
+      @media @screen-gt-s {
+        width: 49px;
+      }
+    }
+  }
+
