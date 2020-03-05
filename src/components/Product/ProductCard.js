@@ -4,13 +4,14 @@ import "./ProductCard.less";
 import OrderForm from './../../components/OrderForm/OrderForm';
 
 function Sizes(props) {
-
+    
     if (!Array.isArray(props.data)) return null;
-    const sizes = props.data.map((item) =>
-        <div className="product-card__size">
+   
+    const sizes = props.data.map((item, index) =>
+        <div className="product-card__size" key={index}>
             <label className="radio-box">
                 <input className="radio-box__input" type="radio" name="size"
-                    value={item} onClick={props.changeSizeHandler} />
+                    value={item} onClick={props.changeSizeHandler} {...((props.defaultSize === item) ? {checked: true}: {})} />
                 <span className="radio-box__text">{item}</span>
             </label>
         </div>
@@ -77,7 +78,7 @@ export class ProductCard extends React.Component {
     render() {
         return (
             <Fragment>
-                {(this.state.showOrderForm) ? <OrderForm closeFormHandler={this.closeOrderForm} product={this.state.product} /> : null}
+                {(this.state.showOrderForm) ? <OrderForm closeFormHandler={this.closeOrderForm} product={this.state.product} checkedSize={this.state.checkedSize}/> : null}
                 <Column quantityColumnsS="1"
                     quantityColumnsM="2"
                     quantityColumnsL="4">
@@ -107,7 +108,6 @@ export class OrderingProductCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            checkedSize: props.checkedSize || "",
             disableButton: props.product.sizes.length,
             product: {
                 name: props.product.name,
@@ -118,15 +118,6 @@ export class OrderingProductCard extends React.Component {
                 sizes: props.product.sizes
             }
         };
-
-        this.changeSizeHandler = this.changeSizeHandler.bind(this);
-    }
-
-    changeSizeHandler(e) {
-        const checkedSize = e.target.value;
-        this.setState({
-            checkedSize: checkedSize
-        });
     }
 
     render() {
@@ -142,7 +133,7 @@ export class OrderingProductCard extends React.Component {
                     </div>
                     <div className="product-card__description">{this.state.product.description}
                     </div>
-                    <Sizes data={this.state.product.sizes} changeSizeHandler={this.changeSizeHandler} checkedSize={this.state.checkedSize} />
+                    <Sizes data={this.state.product.sizes} changeSizeHandler={this.props.changeSizeHandler} defaultSize={this.props.checkedSize} />
                 </div>
             </Fragment>
         )

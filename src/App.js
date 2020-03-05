@@ -1,37 +1,29 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import Advantages from './components/Advantages/Advantages';
 import Footer from './components/Footer/Footer';
 import Slider from './components/Slider/Slider';
 import PopularProducts from './components/PopularProducts/PopularProducts';
-import OrderForm from './components/OrderForm/OrderForm';
+import { getPopularProducts } from "./actions";
 
 import "./less/fonts.less";
 import "./less/global.less";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      popularProducts: []
-    }
-    
-  }
+const mapStateToProps = state => ({
+  popularProducts: state.popularProducts,
+});
 
+const mapDispatchToProps = dispatch => ({
+  getPopularProductsFromServer: link => dispatch(getPopularProducts(link))
+});
+
+class App extends React.Component {
+ 
   componentDidMount() {
-    fetch('http://localhost:9200/api/feelinglucky')
-      .then(response => response.json())
-      .then(data => {
-       this.setState({
-         popularProducts: data
-       })
-      })
-      .catch(err => console.log(err));
+    this.props.getPopularProductsFromServer('http://localhost:9200/api/feelinglucky');
   }
-
-  
 
   render() {
     return (
@@ -39,10 +31,12 @@ export default class App extends React.Component {
         <Navbar city={"Москва"} />
         <Header />
         <Slider />
-        <PopularProducts data={this.state.popularProducts}/>
+        <PopularProducts data={this.props.popularProducts}/>
         <Advantages />
         <Footer />
       </Fragment>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
