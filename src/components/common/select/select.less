@@ -1,0 +1,87 @@
+@import "./../variables";
+
+.select-block {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 28px;
+    height: @control-height;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: #c5c9ca;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:after {
+    content: "";
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #c5c9ca transparent transparent transparent;
+    position: absolute;
+    top: 45%;
+    right: 10px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .select {
+    box-sizing: border-box;
+    width: 100%;
+    height: @control-height;
+    display: inline-block;
+    padding: 9px 10px;
+    border: 1px solid @color-light-grey;
+    background: @color-light;
+    font: 14px/ (@control-height - 18px) Arial, sans-serif;
+    text-align: left;
+    color: @color-dark-1;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.select-block_active {
+  &:after {
+    transform: matrix(1, 0, 0, -1, 0, 0);
+  }
+
+  .select {
+    background-color: @color-grey;
+  }
+}
+
+.options-container {
+  position: absolute;
+  padding: 23px 0px;
+  height: 290px;
+  width: 100%;
+  background-color: @color-light;
+  z-index: 1000;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &__item {
+    font-family: @font-family-global;
+    padding: 11px 12px;
+    height: 38px;
+    line-height: 16px;
+    box-sizing: border-box;
+    font-size: 14px;
+    display: block;
+
+    &:hover {
+      background-color: @color-primary;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

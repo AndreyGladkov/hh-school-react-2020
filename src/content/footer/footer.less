@@ -1,0 +1,42 @@
+@import "./../../components/common/variables.less";
+
+.footer {
+  padding: 30px 0 25px 0;
+  background-color: @color-dark;
+
+  @media @screen-gt-s {
+    padding: 30px 0 30px 0;
+  }
+
+  &__social {
+    margin-bottom: 30px;
+
+    @media @screen-gt-s {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__mobileApp {
+    margin-bottom: 30px;
+  }
+
+  &__line {
+    border: none;
+    height: 1px;
+    background-color: #666666;
+    margin-bottom: 30px;
+  }
+
+  &__fill {
+    flex-grow: 1;
+  }
+
+  &__logo {
+    display: none;
+
+    @media @screen-gt-m {
+      display: block;
+      float: right;
+    }
+  }
+}

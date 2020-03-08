@@ -1,0 +1,39 @@
+@import "./../../components/common/variables.less";
+
+.header {
+  background-color: @color-dark;
+  color: #fff;
+
+  &__content {
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    @media @screen-gt-m {
+      height: 80px;
+    }
+  }
+
+  &__fill {
+    flex-grow: 1;
+  }
+
+  &__button {
+    margin-left: 20px;
+
+    &-menu {
+      margin-left: 20px;
+      @media @screen-gt-s {
+        display: none;
+      }
+    }
+
+    &-login {
+      margin-left: 20px;
+      display: none;
+      @media @screen-gt-s {
+        display: block;
+      }
+    }
+  }
+}
