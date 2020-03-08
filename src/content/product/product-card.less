@@ -1,0 +1,126 @@
+@import "./../../components/common/headings.less";
+@import "./../../components/common/variables.less";
+
+
+.product {
+  &__header {
+    &:extend(.heading);
+    &:extend(.heading_level-2);
+    margin-top:40px;
+  }
+}
+
+.popup {
+  width: 280px;
+  box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 100;
+  top: -21px;
+  left: -1px;
+  background-color: @color-light;
+
+  @media @screen-gt-s {
+    width: 242px;
+  }
+
+  @media @screen-gt-m {
+    width: 330px;
+    left: -6px;
+  }
+}
+
+.popup-container {
+  position: relative;
+  width: 240px;
+  margin: 20px auto 20px auto;
+
+  @media @screen-gt-s {
+    width: 212px;
+  }
+
+  @media @screen-gt-m {
+    width: 290px;
+  }
+
+  &__button-close {
+    position: absolute;
+    z-index: 100;
+    right: -10px;
+    top: -10px;
+
+    @media @screen-gt-m {
+      display: none;
+    }
+  }
+}
+
+.product-card {
+  position: relative;
+  margin-bottom: 20px;
+  margin-top:20px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 212px;
+
+  &__image-container {
+    font-size: 0;
+    position: relative;
+    min-width: 212px;
+    margin: 0 auto 10px auto;
+
+    @media @screen-gt-m {
+      width: 290px;
+      height: 290px;
+    }
+
+    &_form {
+      width: 290px;
+      height: 290px;
+    }
+  }
+
+  &__image {
+    max-width: 100%;
+  }
+
+  &__name {
+    font: bold 16px/1.2 @font-family-heading;
+    margin-bottom: 10px;
+  }
+
+  &__old-price {
+    color: #aeb5b9;
+    margin-right: 10px;
+    text-decoration: line-through;
+    display: inline-block;
+  }
+
+  &__sale {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #212122;
+    text-align: center;
+    color: @color-light;
+    font: 12px/30px @font-family-heading;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  &__description {
+    font: normal 14px/20px @font-family-heading;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  &__sizes {
+    margin-bottom: 15px;
+    display: flex;
+  }
+
+  &__button-submit {
+    width: 100%;
+  }
+}

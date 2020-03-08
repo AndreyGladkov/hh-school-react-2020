@@ -1,0 +1,22 @@
+@import "./../../../components/common/variables.less";
+
+.navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  display: none;
+
+  @media @screen-gt-s {
+    display: block;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-left: 20px;
+
+    @media @screen-gt-m {
+      margin-left: 30px;
+    }
+  }
+}

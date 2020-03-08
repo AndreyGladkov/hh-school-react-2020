@@ -1,0 +1,19 @@
+@import "./../../components/common/variables.less";
+
+.navbar {
+  &__content {
+    background-color: @color-light;
+
+    height: 40px;
+    display: none;
+    align-items: center;
+
+    @media @screen-gt-s {
+      display: flex;
+    }
+  }
+
+  &__fill {
+    flex-grow: 1;
+  }
+}

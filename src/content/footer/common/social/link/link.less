@@ -1,0 +1,57 @@
+@import "../../../../../components/common/variables.less";
+@imagesPath: "../../../../../images";
+
+.link {
+  font-family: @font-family-global;
+  font-size: @font-size-global;
+  line-height: @line-height-global;
+  color: @color-light;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    color: @color-red;
+  }
+
+  &_blue {
+    color: @color-primary;
+  }
+
+  &_dark-grey {
+    color: @color-dark-grey;
+  }
+
+  &_disabled {
+    cursor: none;
+    pointer-events: none;
+    color: @color-light-grey;
+  }
+}
+
+.link-icon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  background: no-repeat 50% 50%;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+
+  &_twitter {
+    background-image: url("@{imagesPath}/twitter-icon.svg");
+  }
+
+  &_facebook {
+    background-image: url("@{imagesPath}/facebook-icon.svg");
+  }
+
+  &_vk {
+    background-image: url("@{imagesPath}/vk-icon.svg");
+  }
+
+  &_instagram {
+    background-image: url("@{imagesPath}/instagram-icon.svg");
+  }
+}
